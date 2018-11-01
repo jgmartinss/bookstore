@@ -8,6 +8,7 @@ django = "==2.0"
 "psycopg2" = "*"
 pytz = "*"
 djangorestframework = "*"
+"psycopg2-binary" = "*"
 
 [dev-packages]
 tox = "*"
