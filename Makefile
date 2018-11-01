@@ -1,22 +1,27 @@
 clean:
-	rm -rf bookstore/db.sqlite3
+	rm -rf db.sqlite3
+help:
+	@echo '--------------------Bookstore-------------------------'
+	@echo '                                                      '
+	@echo 'Usage:                                                '
+	@echo '------> run         Run project                       '
+	@echo '------> shell       Shell command line                '
+	@echo '------> test        Run tests                         '
+	@echo '------> test        BDD Run tests                     '
+	@echo '------> createuser  Create superuser                  '
+	@echo '------> setup       Setup the project                 '
 run:
 	python3 manage.py runserver
-migrate:
-	python3 manage.py migrate
-migrations:
-	python3 manage.py makemigrations
 createuser:
 	python3 manage.py createsuperuser
 shell:
 	python3 manage.py shell
 test:
-	python3 manage.py test
-install:
-	pip3 install -r requirements.txt
-depends:
-	pip3 freeze > requirements.txt
-rebuild: clean migrations migrate
-
+	python3 manage.py test -n
 test_bdd:
 	python3 manage.py test tests/bdd
+setup:
+	pip install -r requirements.txt
+	python contrib/env_gen.py
+	python3 manage.py makemigrations
+	python3 manage.py migrate

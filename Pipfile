@@ -5,11 +5,16 @@ name = "pypi"
 
 [packages]
 django = "==2.0"
+"psycopg2" = "*"
+pytz = "*"
+djangorestframework = "*"
 
 [dev-packages]
 tox = "*"
 django-debug-toolbar = "*"
 behave-django = "*"
+dj-database-url = "*"
+python-decouple = "*"
 
 [requires]
 python_version = "3.6"
