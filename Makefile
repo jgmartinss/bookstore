@@ -25,3 +25,5 @@ setup:
 	python contrib/env_gen.py
 	python3 manage.py makemigrations
 	python3 manage.py migrate
+diagram:
+	python manage.py graph_models -a -o diagram.png

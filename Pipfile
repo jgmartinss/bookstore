@@ -16,6 +16,7 @@ django-debug-toolbar = "*"
 behave-django = "*"
 dj-database-url = "*"
 python-decouple = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "3.6"
