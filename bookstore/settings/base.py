@@ -18,16 +18,30 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    # djr
     'rest_framework',
+    # my apps
+    'bookstore.apps.accounts',
+    'bookstore.apps.catalog',
+    'bookstore.apps.customers',
+    # outher apps
+    'crispy_forms',
+    'phonenumber_field',
+    'django_countries',
+    'djmoney',
+    'mptt',
+    'trumbowyg',
+    'easy_thumbnails',
+    'image_cropping',
 ]
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
-# AUTH_USER_MODEL = 'accounts.User'
-#
-# AUTHENTICATION_BACKENDS = (
-#     ('django.contrib.auth.backends.ModelBackend'),
-# )
+AUTH_USER_MODEL = 'accounts.User'
+
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.ModelBackend'),
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,8 +101,6 @@ USE_L10N = True
 USE_TZ = True
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
@@ -98,3 +110,17 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 15
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+TRUMBOWYG_THUMBNAIL_SIZE = (1920, 1080)
+
+TRUMBOWYG_TRANSLITERATE_FILENAME = True
+
+from easy_thumbnails.conf import Settings as easy_thumbnail_settings
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+)
+THUMBNAIL_PROCESSORS += easy_thumbnail_settings.THUMBNAIL_PROCESSORS
+
+IMAGE_CROPPING_SIZE_WARNING = True

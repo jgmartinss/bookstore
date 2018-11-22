@@ -5,10 +5,19 @@ name = "pypi"
 
 [packages]
 django = "==2.0"
-"psycopg2" = "*"
-pytz = "*"
 djangorestframework = "*"
-"psycopg2-binary" = "*"
+django-crispy-forms = "*"
+django-phonenumber-field = "*"
+phonenumbers = "*"
+django-countries = "*"
+django-money = "*"
+pillow = "*"
+django-mptt = "*"
+pytz = "*"
+django-model-utils = "*"
+django-trumbowyg = "*"
+django-image-cropping = "*"
+easy-thumbnails = "*"
 
 [dev-packages]
 tox = "*"
