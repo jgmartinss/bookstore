@@ -1,0 +1,31 @@
+{% extends "admin/change_list.html" %}
+{% load humanize %}
+
+{% block content_title %}
+    <h1> Authors summarys </h1>
+{% endblock %}
+
+{% block result_list %}
+    <div class="results">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <div class="text"><a href="#">Name</a></div>
+                    </th>
+                    <th>
+                        <div class="text"><a href="#">Total of books</a></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in authors %}
+                    <tr class="{% cycle 'row1' 'row2' %}">
+                        <td>{{ row.name }}</td>
+                        <td>{{ row.get_books_count|intcomma }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

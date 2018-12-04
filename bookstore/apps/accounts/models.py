@@ -18,7 +18,7 @@ class User(AbstractBaseUser,  PermissionsMixin, TimeStampedModel):
     first_name = models.CharField(_('First Name'), max_length=100)
     last_name = models.CharField(_('Last Name'), max_length=100)
     tax_vat_number = models.CharField(_('TAX/Vat Number'), max_length=12)
-    phone_number = PhoneNumberField(_('Phone'), unique=True)
+    phone_number = PhoneNumberField(_('Phone'), unique=True, blank=True, null=True)
     company = models.CharField(
         _('Company'),
         max_length=125,

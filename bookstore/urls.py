@@ -12,6 +12,7 @@ from django.views import generic
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('bookstore.apps.accounts.urls')),
+    path('catalog/', include('bookstore.apps.catalog.urls')),
     path('trumbowyg/', include('trumbowyg.urls')),
     path('', generic.TemplateView.as_view(template_name='index.html'), name='index'),
 ]

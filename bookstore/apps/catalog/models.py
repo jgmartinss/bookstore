@@ -1,6 +1,10 @@
 from django.db import models
 
+from django.urls import reverse
+
 from django.utils.translation import gettext_lazy as _
+
+from django.template.defaultfilters import truncatechars
 
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -40,6 +44,10 @@ class Author(TimeStampedModel):
         verbose_name = _("Author")
         verbose_name_plural = _("Authors")
         db_table = 'tb_catalog_author'
+
+    @property
+    def get_books_count(self):
+        return Book.objects.filter(author=self).count()
 
     def get_absolute_url(self):
         return reverse('author:detail', kwargs={'slug': self.slug})
@@ -128,8 +136,12 @@ class Book(abstract_models.Product):
     def dimensions_of_the_book(self):
         return f"{self.height}x{self.length} cm"
 
+    @property
+    def short_synopsis(self):
+        return truncatechars(self.synopsis, 94)
+
     def get_absolute_url(self):
-        return reverse('book:detail', kwargs={'slug': self.slug})
+        return reverse('book-detail', kwargs={'slug': self.slug})
 
     def __str__(self):
         return f"{self.title}"
@@ -152,7 +164,7 @@ class Images(models.Model):
     )
     content_object = GenericForeignKey('content_type', 'object_id')
     image = ImageCropField(_('Image'), blank=True, upload_to='media')
-    cropping = ImageRatioField('image', '450x600')
+    cropping = ImageRatioField('image', '600x400')
 
     class Meta:
         app_label = 'catalog'

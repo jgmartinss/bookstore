@@ -24,6 +24,9 @@ INSTALLED_APPS = [
     'bookstore.apps.accounts',
     'bookstore.apps.catalog',
     'bookstore.apps.customers',
+    'bookstore.apps.newsletter',
+    'bookstore.apps.orders',
+    'bookstore.apps.summarys',
     # outher apps
     'crispy_forms',
     'phonenumber_field',

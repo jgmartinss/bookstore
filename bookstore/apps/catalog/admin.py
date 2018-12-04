@@ -88,6 +88,11 @@ class BookAdmin(admin.ModelAdmin):
     list_display_links = ['title']
     list_filter = ('is_active', 'is_featured', 'hardback', 'category',)
     date_hierarchy = 'created'
+    radio_fields = {
+        'availability_of_stock': admin.HORIZONTAL,
+        'show_real_price': admin.HORIZONTAL
+    }
+    filter_horizontal = ['author', 'category']
     prepopulated_fields = {'slug': ('title',)}
     fieldsets = (
         ('Product info', {
@@ -124,7 +129,7 @@ class BookAdmin(admin.ModelAdmin):
     )
 
     def get_authors(self, obj):
-        return "\n".join([
+        return ",\n".join([
             a.name for a in obj.author.all()
         ])
     get_authors.short_description = _("Author(s)")
