@@ -9,11 +9,17 @@ help:
 	@echo '------> test        Run tests                         '
 	@echo '------> test        BDD Run tests                     '
 	@echo '------> createuser  Create superuser                  '
+	@echo '------> migrations  Run makemigrations                '
+	@echo '------> migrate     Run migrate                       '
 	@echo '------> setup       Setup the project                 '
 run:
 	python3 manage.py runserver
 createuser:
 	python3 manage.py createsuperuser
+migrations:
+	python3 manage.py makemigrations
+migrate:
+	python3 manage.py migrate
 shell:
 	python3 manage.py shell
 test:
