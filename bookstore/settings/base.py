@@ -25,8 +25,7 @@ INSTALLED_APPS = [
     'bookstore.apps.catalog',
     'bookstore.apps.customers',
     'bookstore.apps.newsletter',
-    'bookstore.apps.orders',
-    'bookstore.apps.summarys',
+    'bookstore.apps.coupons',
     # outher apps
     'crispy_forms',
     'phonenumber_field',
@@ -116,9 +115,9 @@ REST_FRAMEWORK = {
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-TRUMBOWYG_THUMBNAIL_SIZE = (1920, 1080)
+TRUMBOWYG_THUMBNAIL_SIZE = (300, 300)
 
-TRUMBOWYG_TRANSLITERATE_FILENAME = True
+TRUMBOWYG_TRANSLITERATE_FILENAME = False
 
 from easy_thumbnails.conf import Settings as easy_thumbnail_settings
 THUMBNAIL_PROCESSORS = (

@@ -6,9 +6,6 @@ from django.utils.translation import gettext_lazy as _
 
 from django.template.defaultfilters import truncatechars
 
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
-
 from mptt.models import MPTTModel, TreeForeignKey
 from model_utils.models import TimeStampedModel
 from image_cropping import ImageCropField, ImageRatioField
@@ -101,16 +98,17 @@ class Book(abstract_models.Product):
     author = models.ManyToManyField(
         'catalog.Author',
         verbose_name=_('Autor'),
-        related_name='+'
+        related_name='book_authors'
     )
     category = models.ManyToManyField(
         'catalog.Category',
         verbose_name=_('Category'),
-        related_name='+'
+        related_name='book_categories'
     )
     publishing_company = models.ForeignKey(
         'catalog.PublishingCompany',
         verbose_name=_('Publishing Company'),
+        related_name='book_publishing_company',
         on_delete=models.CASCADE
     )
     isbn = models.CharField(_('ISBN'), max_length=13)
@@ -147,33 +145,25 @@ class Book(abstract_models.Product):
         return f"{self.title}"
 
 
-class Images(models.Model):
-    limit = models.Q(app_label='catalog', model='author') | \
-            models.Q(app_label='catalog', model='book')
-    content_type = models.ForeignKey(
-        ContentType,
-        on_delete=models.CASCADE,
-        verbose_name=_('Content type'),
-        limit_choices_to=limit,
-        null=True,
-        blank=True,
+class BookImages(models.Model):
+    book = models.ForeignKey(
+        'catalog.Book',
+        verbose_name=_('Book'),
+        related_name='images',
+        on_delete=models.CASCADE
     )
-    object_id = models.PositiveIntegerField(
-        verbose_name=_('Related object'),
-        null=True,
-    )
-    content_object = GenericForeignKey('content_type', 'object_id')
     image = ImageCropField(_('Image'), blank=True, upload_to='media')
-    cropping = ImageRatioField('image', '600x400')
+    list_page_cropping = ImageRatioField('image', '600x400')
+    detail_page_cropping = ImageRatioField('image', '800x800')
 
     class Meta:
         app_label = 'catalog'
-        verbose_name = _("Image")
-        verbose_name_plural = _("Images")
-        db_table = 'tb_catalog_images'
+        verbose_name = _("Book Image")
+        verbose_name_plural = _("Book Images")
+        db_table = 'tb_catalog_book_images'
 
     def get_absolute_url(self):
-        return reverse('image:detail', kwargs={'slug': self.slug})
+        return reverse('bookimages:detail', kwargs={'pk': self.id})
 
     def __str__(self):
-        return f'Image'
+        return f'{self.book.title}/ {self.id}'

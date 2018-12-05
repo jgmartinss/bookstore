@@ -26,10 +26,11 @@ class BookForm(ModelForm):
         }
 
 
-class ImagesForm(ModelForm):
+class BookImagesForm(ModelForm):
     class Meta:
-        model = models.Images
+        model = models.BookImages
         fields = '__all__'
         widgets = {
-            'image': ImageCropWidget,
+            'list_page_cropping': ImageCropWidget(),
+            'detail_page_cropping': ImageCropWidget(),
         }

@@ -7,9 +7,9 @@ class UserAdmin(admin.ModelAdmin):
     model = models.User
     ordering = ('email', '-created',)
     search_fields = ('email',)
-    list_display = ('email', 'is_superuser', 'is_active', 'created')
+    list_display = ('email', 'is_superuser', 'is_admin', 'is_active', 'created')
     list_display_links = ['email']
-    list_filter = ('is_active',)
+    list_filter = ('is_active', 'is_superuser', 'is_admin',)
     date_hierarchy = 'created'
     fieldsets = (
         ('Account info', {

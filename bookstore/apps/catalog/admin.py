@@ -9,16 +9,22 @@ from . import models
 from . import forms
 
 
-class ImagesAdmin(ImageCroppingMixin, admin.ModelAdmin):
-    form = forms.ImagesForm
+class BookImagesAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    model = models.BookImages
+    form = forms.BookImagesForm
     fieldsets = (
         (None, {
            'fields': (
-               ('content_type', 'object_id'),
-               'image', 'cropping'
+               'book', 'image',
+               'list_page_cropping',
+               'detail_page_cropping',
            )}
          ),
     )
+
+class BookImagesInline(ImageCroppingMixin, admin.TabularInline):
+    model = models.BookImages
+
 
 
 class CategoryAdmin(DraggableMPTTAdmin, admin.ModelAdmin):
@@ -76,6 +82,7 @@ class AuthorAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     model = models.Book
     form = forms.BookForm
+    # inlines = [BookImagesInline]
     list_per_page = 15
     save_on_top = True
     save_as = True
@@ -86,7 +93,10 @@ class BookAdmin(admin.ModelAdmin):
         'dimensions_of_the_book', 'price', 'quantity',
     )
     list_display_links = ['title']
-    list_filter = ('is_active', 'is_featured', 'hardback', 'category',)
+    list_filter = (
+        'is_active', 'is_featured',
+        'availability_of_stock', 'hardback', 'author',
+    )
     date_hierarchy = 'created'
     radio_fields = {
         'availability_of_stock': admin.HORIZONTAL,
@@ -145,4 +155,4 @@ admin.site.register(models.Author, AuthorAdmin)
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.PublishingCompany, PublishingCompanyAdmin)
 admin.site.register(models.Book, BookAdmin)
-admin.site.register(models.Images, ImagesAdmin)
+admin.site.register(models.BookImages, BookImagesAdmin)
