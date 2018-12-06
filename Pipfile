@@ -26,6 +26,8 @@ behave-django = "*"
 dj-database-url = "*"
 python-decouple = "*"
 django-extensions = "*"
+factory-boy = "*"
+faker = "*"
 
 [requires]
 python_version = "3.6"
