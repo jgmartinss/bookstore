@@ -1,10 +1,10 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from bookstore.apps.coupons import factories, models
+from bookstore.apps.newsletter import factories, models
 
 
 class Command(BaseCommand):
-    help = 'Generates random coupons'
+    help = 'Generates random subscribe'
 
     def add_arguments(self, parser):
         parser.add_argument('count', type=int)
@@ -20,6 +20,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         count = options['count']
         if options['clear']:
-            models.Coupon.objects.all().delete()
-        factories.CouponFactory.create_batch(size=count)
-        self.stdout.write(self.style.SUCCESS(f'Generated {count} coupon(s)!'))
+            models.Subscribe.objects.all().delete()
+        factories.SubscribeFactory.create_batch(size=count)
+        self.stdout.write(self.style.SUCCESS(f'Generated {count} subscribe(s)!'))
