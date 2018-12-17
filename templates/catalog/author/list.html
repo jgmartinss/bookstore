@@ -7,12 +7,13 @@
     <div class="row">
         <div class="col-sm">
             <div class="card">
-                <div class="card-header bg-primary text-white text-uppercase">
-                    <i class=""></i> Author list
-                </div>
+                <div class="card-header bg-primary text-white text-uppercase">Author(s)</div>
                 <div class="list-group">
                   {% for author in authors %}
-                  <a href="#" class="list-group-item">{{author.name}} <span class="badge">{{author.get_books_count}}</span></a>
+                  <div class="list-group-item">
+                    <a href="{% url 'author-detail' slug=author.slug %}">{{author.name}} </a>
+                    <span class="badge">{{author.get_books_count}} Books</span>
+                  </div>
                   {% endfor %}
                 </div>
                 <div class="col-md-2 col-md-offset-12">
@@ -26,13 +27,17 @@
                         {% endif %}
                         {% for i in paginator.page_range %}
                           {% if page_obj.number == i %}
-                            <li class="page-link" class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                            <li class="page-link" class="active">
+                              <span>{{ i }} <span class="sr-only">(current)</span></span>
+                            </li>
                           {% else %}
                             <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
                           {% endif %}
                         {% endfor %}
                         {% if page_obj.has_next %}
-                          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                          </li>
                         {% else %}
                           <li class="page-link" class="disabled"><span>&raquo;</span></li>
                         {% endif %}

@@ -37,8 +37,23 @@ class BookDetailView(generic.DetailView):
 class AuthorListView(generic.ListView):
     context_object_name = 'authors'
     model = models.Author
-    paginate_by = 20
+    paginate_by = 10
     template_name = 'catalog/author/list.html'
 
     def get_queryset(self, **kargs):
         return models.Author.objects.all().order_by('name')
+
+
+class AuthorDetailView(generic.DetailView):
+    model = models.Author
+    context_object_name = 'author'
+    template_name = 'catalog/author/detail.html'
+
+    def get_object(self):
+        _slug = self.kwargs.get("slug")
+        return get_object_or_404(models.Author, slug=_slug)
+
+    def get_context_data(self, **kwargs):
+        context = super(AuthorDetailView, self).get_context_data(**kwargs)
+        context['books'] = models.Book.objects.filter(author=self.object)
+        return context
