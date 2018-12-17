@@ -14,6 +14,7 @@ urlpatterns = [
     path('book/<slug:slug>/', views.BookDetailView.as_view(), name='book-detail'),
     path('authors/', views.AuthorListView.as_view(), name='author-list'),
     path('author/<slug:slug>/', views.AuthorDetailView.as_view(), name='author-detail'),
+    path('publishingcompanies/', views.PublishingCompanyListView.as_view(), name='publishing-list'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 

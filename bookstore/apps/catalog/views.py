@@ -57,3 +57,13 @@ class AuthorDetailView(generic.DetailView):
         context = super(AuthorDetailView, self).get_context_data(**kwargs)
         context['books'] = models.Book.objects.filter(author=self.object)
         return context
+
+
+class PublishingCompanyListView(generic.ListView):
+    context_object_name = 'publishingcompany'
+    model = models.PublishingCompany
+    paginate_by = 15
+    template_name = 'catalog/publishingcompany/list.html'
+
+    def get_queryset(self, **kargs):
+        return models.PublishingCompany.objects.all().order_by('name')
