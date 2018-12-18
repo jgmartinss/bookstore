@@ -5,7 +5,6 @@ from django.views import generic
 from . import models
 
 
-
 class BookListView(generic.ListView):
     model = models.Book
     context_object_name = 'books'
@@ -16,22 +15,22 @@ class BookListView(generic.ListView):
         return models.Book.objects.all().order_by('title')
 
 
-class LastFourBookListView(generic.ListView):
-    model = models.Book
-    context_object_name = 'last_four_book'
-    template_name = 'catalog/book/last_four.html'
-
-    def get_queryset(self, **kargs):
-        return models.Book.objects.all().order_by('-created')[:4]
-
-
 class BookDetailView(generic.DetailView):
     model = models.Book
+    context_object_name = 'book'
     template_name = 'catalog/book/detail.html'
 
     def get_object(self):
         _slug = self.kwargs.get("slug")
         return get_object_or_404(models.Book, slug=_slug)
+
+    def get_context_data(self, **kwargs):
+        context = super(BookDetailView, self).get_context_data(**kwargs)
+        bookreviews = models.BookReview.objects.all()
+        bookimages = models.BookImages.objects.all()
+        context['book_images'] = bookimages.filter(book=self.object)[:1]
+        context['book_review'] = bookreviews.filter(book=self.object).order_by('-created')[:4]
+        return context
 
 
 class AuthorListView(generic.ListView):

@@ -43,3 +43,11 @@ LANGUAGES = [
     ('zh-hans', _('Chinese')),
     ('zh-tw', _('Chinese (Taiwan)'))
 ]
+
+NUMBER_OF_STAR = (
+    (1, _('1 Star')),
+    (2, _('2 Star')),
+    (3, _('3 Star')),
+    (4, _('4 Star')),
+    (5, _('5 Star')),
+)

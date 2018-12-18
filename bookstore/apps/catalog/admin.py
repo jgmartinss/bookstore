@@ -26,7 +26,6 @@ class BookImagesInline(ImageCroppingMixin, admin.TabularInline):
     model = models.BookImages
 
 
-
 class CategoryAdmin(DraggableMPTTAdmin, admin.ModelAdmin):
     model = models.Category
     ordering = ('name', '-created',)
@@ -145,10 +144,21 @@ class BookAdmin(admin.ModelAdmin):
     get_authors.short_description = _("Author(s)")
 
     def get_categories(self, obj):
-        return "\n".join([
+        return ",\n".join([
             c.name for c in obj.category.all()
         ])
     get_categories.short_description = _("Categories")
+
+
+class BookReviewAdmin(admin.ModelAdmin):
+    model = models.BookReview
+    ordering = ('-created',)
+    search_fields = ('user', 'book__title',)
+    list_display = ('book', 'get_short_comment', 'user', 'number_of_stars',)
+    list_display_links = ['book']
+    list_filter = ('number_of_stars',)
+    date_hierarchy = 'created'
+    list_per_page = 10
 
 
 admin.site.register(models.Author, AuthorAdmin)
@@ -156,3 +166,4 @@ admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.PublishingCompany, PublishingCompanyAdmin)
 admin.site.register(models.Book, BookAdmin)
 admin.site.register(models.BookImages, BookImagesAdmin)
+admin.site.register(models.BookReview, BookReviewAdmin)

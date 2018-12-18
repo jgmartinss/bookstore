@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 
 from django.urls import reverse
 
@@ -138,12 +139,22 @@ class Book(abstract_models.Product):
     def short_synopsis(self):
         return truncatechars(self.synopsis, 94)
 
+    @property
+    def get_count_reviews(self):
+        return BookReview.objects.filter(book=self).count()
+
+    @property
+    def get_avg_ratings(self):
+        queryset = BookReview.objects.filter(book=self)
+        return int(queryset.aggregate(Avg('number_of_stars'))['number_of_stars__avg'])
+
     def get_absolute_url(self):
         return reverse('book-detail', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return f"{self.title}"
-
+        if  self.original_title:
+            return f"{self.title} - ({self.original_title})"
+        return f'{self.title}'
 
 class BookImages(models.Model):
     book = models.ForeignKey(
@@ -167,3 +178,40 @@ class BookImages(models.Model):
 
     def __str__(self):
         return f'{self.book.title}/ {self.id}'
+
+
+class BookReview(TimeStampedModel):
+    book = models.ForeignKey(
+        'catalog.Book',
+        verbose_name=_('Book'),
+        related_name='book_review',
+        on_delete=models.CASCADE
+    )
+    comment = models.TextField(_('Comment'))
+    user = models.ForeignKey(
+        'accounts.User',
+        verbose_name=_('User'),
+        related_name='user_review',
+        on_delete=models.CASCADE
+    )
+    number_of_stars = models.PositiveIntegerField(
+        _('Stars'), 
+        choices=choices.NUMBER_OF_STAR,
+        default=1
+    )
+
+    class Meta:
+        app_label = 'catalog'
+        verbose_name = _("Book Review")
+        verbose_name_plural = _("Book Reviews")
+        db_table = 'tb_catalog_book_review'
+
+    @property
+    def get_short_comment(self):
+        return truncatechars(self.comment, 45)
+
+    def get_absolute_url(self):
+        return reverse('bookreview:detail', kwargs={'pk': self.id})
+
+    def __str__(self):
+        return f'({self.book.title}) - {self.number_of_stars} Stars by: {self.user}'
