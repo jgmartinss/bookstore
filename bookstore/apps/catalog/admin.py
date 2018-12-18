@@ -22,6 +22,7 @@ class BookImagesAdmin(ImageCroppingMixin, admin.ModelAdmin):
          ),
     )
 
+
 class BookImagesInline(ImageCroppingMixin, admin.TabularInline):
     model = models.BookImages
 

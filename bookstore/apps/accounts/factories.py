@@ -1,11 +1,13 @@
 import factory
 import random
+
 from factory import fuzzy
 
 from django.utils.text import slugify
 
 from factory.django import DjangoModelFactory
 from faker import Faker
+
 from . import models
 from . import choices
 

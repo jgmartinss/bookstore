@@ -19,4 +19,5 @@ class SubscribeAdmin(admin.ModelAdmin):
          ),
     )
 
+
 admin.site.register(models.Subscribe, SubscribeAdmin)

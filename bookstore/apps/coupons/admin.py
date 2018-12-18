@@ -20,4 +20,5 @@ class CouponAdmin(admin.ModelAdmin):
          ),
     )
 
+
 admin.site.register(models.Coupon, CouponAdmin)

@@ -9,6 +9,7 @@ from faker import Faker
 from . import models
 from . import choices
 
+
 fake = Faker()
 
 

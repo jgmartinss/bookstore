@@ -27,7 +27,8 @@ test:
 test_bdd:
 	python3 manage.py test tests/bdd
 setup:
-	pip install -r requirements.txt
+	pipenv install
+	pipenv install -d 
 	python contrib/env_gen.py
 	python3 manage.py makemigrations
 	python3 manage.py migrate

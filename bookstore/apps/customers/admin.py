@@ -16,4 +16,5 @@ class AddressAdmin(admin.ModelAdmin):
     list_filter = ('use_as_billing_address',)
     date_hierarchy = 'created'
 
+
 admin.site.register(models.Address, AddressAdmin)

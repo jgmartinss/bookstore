@@ -156,7 +156,7 @@ class Book(abstract_models.Product):
             return f"{self.title} - ({self.original_title})"
         return f'{self.title}'
 
-class BookImages(models.Model):
+class BookImages(TimeStampedModel):
     book = models.ForeignKey(
         'catalog.Book',
         verbose_name=_('Book'),

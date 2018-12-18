@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(
 
 SECRET_KEY = config('SECRET_KEY')
 
-INSTALLED_APPS = [
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -18,15 +18,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    # djr
+]
+
+THIRD_PARTY_APPS = [
     'rest_framework',
-    # my apps
-    'bookstore.apps.accounts',
-    'bookstore.apps.catalog',
-    'bookstore.apps.customers',
-    'bookstore.apps.newsletter',
-    'bookstore.apps.coupons',
-    # outher apps
     'crispy_forms',
     'phonenumber_field',
     'django_countries',
@@ -36,6 +31,16 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'image_cropping',
 ]
+
+LOCAL_APPS = [
+    'bookstore.apps.accounts',
+    'bookstore.apps.catalog',
+    'bookstore.apps.customers',
+    'bookstore.apps.newsletter',
+    'bookstore.apps.coupons',
+]
+
+INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DEFAULT_APPS
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 

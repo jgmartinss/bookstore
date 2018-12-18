@@ -3,6 +3,7 @@
 {% block title %} {{ block.super }} - Sign In {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
+
 <link href="{% static 'css/accounts/style.css' %}" rel="stylesheet">
 <div class="body">
   <form method="POST" action="{% url 'sign-in' %}" class="form-signin">
@@ -13,4 +14,5 @@
     <button class="btn btn-lg btn-primary btn-block" id="btn-submit" type="submit">Sign in</button>
   </form>
 </div>
+
 {% endblock content %}

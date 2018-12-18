@@ -1,6 +1,7 @@
 import factory
 
 from factory.django import DjangoModelFactory
+
 from faker import Faker
 
 from . import models
