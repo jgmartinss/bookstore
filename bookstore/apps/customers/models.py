@@ -39,3 +39,40 @@ class Address(TimeStampedModel):
 
     def __str__(self):
         return f"{self.get_full_name} - ({self.postal_code}/{self.street_1}, {self.street_2})"
+
+
+class BookReview(TimeStampedModel):
+    book = models.ForeignKey(
+        'catalog.Book',
+        verbose_name=_('Book'),
+        related_name='book_review',
+        on_delete=models.CASCADE
+    )
+    comment = models.TextField(_('Comment'))
+    user = models.ForeignKey(
+        'accounts.User',
+        verbose_name=_('User'),
+        related_name='user_review',
+        on_delete=models.CASCADE
+    )
+    number_of_stars = models.PositiveIntegerField(
+        _('Stars'), 
+        choices=choices.NUMBER_OF_STAR,
+        default=1
+    )
+
+    class Meta:
+        app_label = 'catalog'
+        verbose_name = _("Book Review")
+        verbose_name_plural = _("Book Reviews")
+        db_table = 'tb_customer_book_review'
+
+    @property
+    def get_short_comment(self):
+        return truncatechars(self.comment, 45)
+
+    def get_absolute_url(self):
+        return reverse('bookreview:detail', kwargs={'pk': self.id})
+
+    def __str__(self):
+        return f'({self.book.title}) - {self.number_of_stars} Stars by: {self.user}'

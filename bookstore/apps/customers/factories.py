@@ -10,6 +10,8 @@ from factory.django import DjangoModelFactory
 from faker import Faker
 
 from . import models
+from . import choices
+from bookstore.apps.catalog.factories import BookFactory
 from bookstore.apps.accounts.factories import UserFactory
 
 
@@ -33,3 +35,15 @@ class AddressFactory(DjangoModelFactory):
     	if random.choice((0, 0, 0, 1, 1)):
     		return fake.secondary_address()
     	return ''
+
+
+class BookReviewFactory(DjangoModelFactory):
+    class Meta:
+        model = models.BookReview
+
+    book = factory.SubFactory(BookFactory)
+    comment = factory.Faker('sentence')
+    user = factory.SubFactory(UserFactory)
+    number_of_stars = factory.Iterator(
+        [choices.ONE, choices.TWO, choices.THREE, choices.FOUR, choices.FIVE]
+    )

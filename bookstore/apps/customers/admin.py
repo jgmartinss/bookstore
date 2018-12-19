@@ -17,4 +17,16 @@ class AddressAdmin(admin.ModelAdmin):
     date_hierarchy = 'created'
 
 
+class BookReviewAdmin(admin.ModelAdmin):
+    model = models.BookReview
+    ordering = ('-created',)
+    search_fields = ('user', 'book__title',)
+    list_display = ('book', 'get_short_comment', 'user', 'number_of_stars',)
+    list_display_links = ['book']
+    list_filter = ('number_of_stars',)
+    date_hierarchy = 'created'
+    list_per_page = 10
+
+
 admin.site.register(models.Address, AddressAdmin)
+admin.site.register(models.BookReview, BookReviewAdmin)

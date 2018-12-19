@@ -2,6 +2,8 @@ from django.shortcuts import  get_object_or_404
 
 from django.views import generic
 
+from bookstore.apps.customers.models import BookReview
+
 from . import models
 
 
@@ -26,7 +28,7 @@ class BookDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(BookDetailView, self).get_context_data(**kwargs)
-        bookreviews = models.BookReview.objects.all()
+        bookreviews = BookReview.objects.all()
         bookimages = models.BookImages.objects.all()
         context['book_images'] = bookimages.filter(book=self.object)[:1]
         context['book_review'] = bookreviews.filter(book=self.object).order_by('-created')[:4]
