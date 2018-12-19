@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
 from model_utils.models import TimeStampedModel
 
+from . import choices
+
 
 class Address(TimeStampedModel):
     user = models.ForeignKey(
