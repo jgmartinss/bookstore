@@ -34,3 +34,19 @@ setup:
 	python3 manage.py migrate
 diagram:
 	python manage.py graph_models -a -o diagram.png
+populate_accounts:
+	python manage.py generate_users 20
+populate_customers:
+	python manage.py generate_address 20
+populate_coupons:
+	python manage.py generate_coupons 15
+populate_newslatter:
+	python manage.py generate_subscribes 15
+populate_catalog:
+	python manage.py generate_authors 20
+	python manage.py generate_categories 10
+	python manage.py generate_publishers 10
+	python manage.py generate_books 20
+
+
+

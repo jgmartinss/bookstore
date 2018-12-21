@@ -1,21 +1,32 @@
 from django.utils.translation import gettext_lazy as _
 
 
+CATALOG = 1
+SEARCH = 2
+CATALOG_SEARCH = 3
+
 VISIBLE_WHERE = (
-    (1, _('Catalog')),
-    (2, _('Search')),
-    (3, _('Catalog, Search')),
+    (CATALOG, _('Catalog')),
+    (SEARCH, _('Search')),
+    (CATALOG_SEARCH, _('Catalog, Search')),
 )
+
+INCART = 1
+SEARCH = 2
+BEFOREORDER = 3
 
 SHOW_REAL_PRICE = (
-    (1, _('In cart')),
-    (2, _('Search')),
-    (3, _('Before confirming order')),
+    (INCART, _('In cart')),
+    (SEARCH, _('Search')),
+    (BEFOREORDER, _('Before confirming order')),
 )
 
+OFSTOCK = 1
+INSTOCK = 2
+
 AVAILABILITY_OF_STOCK = (
-    (1, _('Out of stock')),
-    (2, _('In stock')),
+    (OFSTOCK, _('Out of stock')),
+    (INSTOCK, _('In stock')),
 )
 
 LANGUAGES = [

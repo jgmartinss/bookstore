@@ -5,7 +5,6 @@ from . import models
 
 class AddressAdmin(admin.ModelAdmin):
     model = models.Address
-
     ordering = ('user__first_name', '-created',)
     search_fields = ('user__email', 'postal_code',)
     list_display = (
