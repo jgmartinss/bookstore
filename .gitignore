@@ -103,3 +103,18 @@ venv.bak/
 # mypy
 .mypy_cache/
 .vscode/
+
+# media
+media/
+
+# migrations
+
+bookstore/apps/accounts/migrations/0001_initial.py
+bookstore/apps/catalog/migrations/0001_initial.py
+bookstore/apps/checkout/migrations/0001_initial.py
+bookstore/apps/coupons/migrations/0001_initial.py
+bookstore/apps/customers/migrations/0001_initial.py
+bookstore/apps/newsletter/migrations/0001_initial.py
+bookstore/apps/orders/migrations/0001_initial.py
+bookstore/apps/sites/migrations/0001_initial.py
+bookstore/apps/summarys/migrations/0001_initial.py
