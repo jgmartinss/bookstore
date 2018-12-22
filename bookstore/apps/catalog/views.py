@@ -3,6 +3,7 @@ from django.shortcuts import  get_object_or_404
 from django.views import generic
 
 from bookstore.apps.customers.models import BookReview
+from bookstore.apps.checkout.forms import CartAddProductForm
 
 from . import models
 
@@ -30,8 +31,10 @@ class BookDetailView(generic.DetailView):
         context = super(BookDetailView, self).get_context_data(**kwargs)
         bookreviews = BookReview.objects.all()
         bookimages = models.BookImages.objects.all()
+        cart_product_form = CartAddProductForm()
         context['book_images'] = bookimages.filter(book=self.object)[:1]
         context['book_review'] = bookreviews.filter(book=self.object).order_by('-created')[:4]
+        context['cart_product_form'] = cart_product_form
         return context
 
 

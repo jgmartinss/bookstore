@@ -24,7 +24,7 @@ class BookReviewAdmin(admin.ModelAdmin):
     list_display_links = ['book']
     list_filter = ('number_of_stars',)
     date_hierarchy = 'created'
-    list_per_page = 10
+    list_per_page = 15
 
 
 admin.site.register(models.Address, AddressAdmin)

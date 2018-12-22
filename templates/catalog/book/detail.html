@@ -32,16 +32,16 @@
                     {% else %}
                         <p class="price">{{book.price}}</p>
                     {% endif %}
-                    <form method="get" action="cart.html">
+                    <form action="{% url 'cart_add' product_id=book.id %}" method="post">
                         <div class="form-group">
-                            <label>Quantity :</label>
+                            <label>Quantity:</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control"  id="quantity" name="quantity" min="1" max="100" value="1">
+                                {{ cart_product_form }}
                                 <div class="input-group-append">
                                     <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                         <i class="fa fa-plus"></i>
@@ -49,9 +49,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="cart.html" class="btn btn-success btn-lg btn-block text-uppercase">
-                            <i class="fa fa-shopping-cart"></i> Add To Cart
-                        </a>
+                        <input class="btn btn-success btn-lg btn-block text-uppercase" class="fa fa-shopping-cart" type="submit" value="Add to cart">
+                        {% csrf_token %}
                     </form>
                     <div class="product_rassurance">
                         <ul class="list-inline">
@@ -70,18 +69,28 @@
                         {{book.get_count_reviews}} reviews
                         {% if book.get_avg_ratings == 1 %}
                             <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
                         {% elif book.get_avg_ratings == 2 %}
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
                         {% elif book.get_avg_ratings == 3 %}
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
                         {% elif book.get_avg_ratings == 4 %}
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
                         {% elif book.get_avg_ratings == 5 %}
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -90,7 +99,6 @@
                             <i class="fa fa-star"></i>
                         {% else %}
                         {% endif %}
-                        ({{book.get_avg_ratings}}/5)
                         <a class="pull-right" href="#reviews">View all reviews</a>
                     </div>
                     <div class="datasheet p-3 mb-2 bg-info text-white">
@@ -188,14 +196,14 @@
         var quantity = 1;
         $('.quantity-right-plus').click(function(e){
             e.preventDefault();
-            var quantity = parseInt($('#quantity').val());
-            $('#quantity').val(quantity + 1);
+            var quantity = parseInt($('#id_quantity').val());
+            $('#id_quantity').val(quantity + 1);
         });
         $('.quantity-left-minus').click(function(e){
             e.preventDefault();
-            var quantity = parseInt($('#quantity').val());
+            var quantity = parseInt($('#id_quantity').val());
             if(quantity > 1){
-                $('#quantity').val(quantity - 1);
+                $('#id_quantity').val(quantity - 1);
             }
         });
     });

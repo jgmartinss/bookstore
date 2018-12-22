@@ -38,6 +38,7 @@ populate_accounts:
 	python manage.py generate_users 20
 populate_customers:
 	python manage.py generate_address 20
+	python manage.py generate_reviews 30
 populate_coupons:
 	python manage.py generate_coupons 15
 populate_newslatter:

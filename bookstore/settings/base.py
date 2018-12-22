@@ -38,9 +38,10 @@ LOCAL_APPS = [
     'bookstore.apps.customers',
     'bookstore.apps.newsletter',
     'bookstore.apps.coupons',
+    'bookstore.apps.checkout',
 ]
 
-INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DEFAULT_APPS
+INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
@@ -49,6 +50,8 @@ AUTH_USER_MODEL = 'accounts.User'
 AUTHENTICATION_BACKENDS = (
     ('django.contrib.auth.backends.ModelBackend'),
 )
+
+CART_SESSION_ID = 'cart'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,6 +93,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'bookstore.apps.checkout.context_processors.cart',
             ],
         },
     },

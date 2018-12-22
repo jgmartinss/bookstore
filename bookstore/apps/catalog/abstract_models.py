@@ -21,26 +21,9 @@ class Product(TimeStampedModel):
         _('Visible where?'),
         choices=choices.VISIBLE_WHERE
     )
-    price = MoneyField(
-        _('Price'),
-        max_digits=14,
-        decimal_places=2,
-        default_currency='USD'
-    )
-    cost_price = MoneyField(
-        _('Const price'),
-        max_digits=14,
-        decimal_places=2,
-        default_currency='USD'
-    )
-    special_price = MoneyField(
-        _('Special price'),
-        max_digits=14,
-        decimal_places=2,
-        default_currency='USD',
-        blank=True,
-        null=True
-    )
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    cost_price = models.DecimalField(max_digits=10, decimal_places=2)
+    special_price = models.DecimalField(max_digits=10, decimal_places=2)
     special_price_from_date = models.DateField(
         _('Special price from date'),
         blank=True,

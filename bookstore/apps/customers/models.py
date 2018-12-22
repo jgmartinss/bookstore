@@ -2,6 +2,8 @@ from django.db import models
 
 from django.utils.translation import gettext_lazy as _
 
+from django.template.defaultfilters import truncatechars
+
 from django_countries.fields import CountryField
 from model_utils.models import TimeStampedModel
 
@@ -29,7 +31,7 @@ class Address(TimeStampedModel):
     class Meta:
         verbose_name = _('Address')
         verbose_name_plural = _('Address')
-        db_tablespace = 'tb_customers_address'
+        db_table = 'tb_customers_address'
 
     @property
     def streets_in_line(self):
@@ -40,7 +42,7 @@ class Address(TimeStampedModel):
         return f'{self.city}/{self.state}/{self.country}'
 
     def __str__(self):
-        return f"{self.get_full_name} - ({self.postal_code}/{self.street_1}, {self.street_2})"
+        return f"{self.user.get_full_name} - ({self.postal_code}/{self.street_1}, {self.street_2})"
 
 
 class BookReview(TimeStampedModel):
