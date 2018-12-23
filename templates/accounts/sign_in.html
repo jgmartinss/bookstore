@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} {{ block.super }} - Sign In {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<link href="{% static 'css/accounts/style.css' %}" rel="stylesheet">
+<div class="body">
+    <form method="POST" action="{% url 'sign-in' %}" class="form-signin">
+        <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-lg btn-primary btn-block" id="btn-submit" type="submit">Sign in</button>
+  </form>
+</div>
+
+{% endblock content %}

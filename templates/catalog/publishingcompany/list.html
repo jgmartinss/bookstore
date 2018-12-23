@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+{% include "partials/nav.html" %}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm"> 
+            <div class="card">
+                <div class="card-header bg-primary text-white text-uppercase">Publishers</div>
+                <div class="list-group">
+                    {% for pc in publishingcompany %}
+                        <div class="list-group-item">
+                            {% if pc.name %}
+                                {{pc.name}}
+                            {% else %}
+                                Not found publishers name.
+                            {% endif %} 
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-2 col-md-offset-12">
+                    <nav aria-label="Page navigation example">
+                    {% if is_paginated %}
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                                </li>
+                            {% else %}
+                                <li class="page-link" class="disabled"><span>&laquo;</span></li>
+                            {% endif %}
+                            {% for i in paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-link" class="active">
+                                        <span>{{ i }} <span class="sr-only">(current)</span></span>
+                                    </li>
+                                {% else %}
+                                    <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                                </li>
+                            {% else %}
+                                <li class="page-link" class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br>
+
+{% include "partials/footer.html" %}
+{% endblock content %}

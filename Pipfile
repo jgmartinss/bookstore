@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==2.0"
+djangorestframework = "*"
+django-crispy-forms = "*"
+django-phonenumber-field = "*"
+phonenumbers = "*"
+django-countries = "*"
+django-money = "*"
+pillow = "*"
+django-mptt = "*"
+pytz = "*"
+django-model-utils = "*"
+django-trumbowyg = "*"
+django-image-cropping = "*"
+easy-thumbnails = "*"
+
+[dev-packages]
+tox = "*"
+django-debug-toolbar = "*"
+behave-django = "*"
+dj-database-url = "*"
+python-decouple = "*"
+django-extensions = "*"
+factory-boy = "*"
+faker = "*"
+
+[requires]
+python_version = "3.6"

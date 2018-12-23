@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+{% include "partials/nav.html" %}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-light mb-3">
+                <div class="card-header bg-primary text-white text-uppercase">
+                    <i class="fa fa-align-justify"></i> Author: {{author.name}}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        {% if author.about_of %} 
+                            {{author.about_of}}
+                        {% else %}
+                            Not found about of author.
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" id="reviews">
+            <div class="card border-light mb-3">
+                <div class="card-header bg-primary text-white text-uppercase">
+                    <i class="fa fa-align-justify"></i> List of related books
+                </div>
+                <div class="card-body">
+                {% for book in books %}
+                    <div class="review">
+                        <p class="blockquote">
+                            <a href="{% url 'book-detail' slug=book.slug %}" class="mb-0">
+                                {% if book.title and book.publishing_company %} 
+                                    {{book.title}} - ({{book.publishing_company}})
+                                {% else %}
+                                    Not found book title and publishing company.
+                                {% endif %}
+                            </a> 
+                        </p><hr>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "partials/footer.html" %}
+{% endblock content %}
