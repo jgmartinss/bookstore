@@ -59,7 +59,7 @@ class AuthorDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(AuthorDetailView, self).get_context_data(**kwargs)
-        context['books'] = models.Book.objects.filter(author=self.object)
+        context['books'] = models.Book.objects.filter(author=self.object)[:10]
         return context
 
 

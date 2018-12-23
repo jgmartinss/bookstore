@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-{% include "partials/nav.html" %}
+{% include "partials/nav.html" %} 
 
 <div class="container">
     <div class="row">
-        <!-- Image -->
         <div class="col-12 col-lg-6">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    <h5 class="text-center">{{book.title}}</h5>
+                    <h5 class="text-center">
+                        {% if book.title %} 
+                            {{book.title}} 
+                        {% else %} 
+                            Not found book title.
+                        {% endif %}
+                    </h5>
                     <a href="" data-toggle="modal" data-target="#productModal">
                         {% for book_image in book_images %}
                             {% if book_image.image %}
@@ -22,7 +27,6 @@
                 </div>
             </div>
         </div>
-        <!-- Add to cart -->
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
                 <div class="card-body">
@@ -37,7 +41,7 @@
                             <label>Quantity:</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-field="">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
@@ -66,90 +70,129 @@
                         </ul>
                     </div>
                     <div class="reviews_product p-3 mb-2 ">
-                        {{book.get_count_reviews}} reviews
-                        {% if book.get_avg_ratings == 1 %}
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                        {% elif book.get_avg_ratings == 2 %}
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                        {% elif book.get_avg_ratings == 3 %}
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                        {% elif book.get_avg_ratings == 4 %}
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                        {% elif book.get_avg_ratings == 5 %}
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                        {% if book.get_count_reviews %}
+                            {{book.get_count_reviews}} reviews
+                            {% if book.get_avg_ratings == 1 %}
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            {% elif book.get_avg_ratings == 2 %}
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            {% elif book.get_avg_ratings == 3 %}
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            {% elif book.get_avg_ratings == 4 %}
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                            {% elif book.get_avg_ratings == 5 %}
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            {% else %}
+                                The book can not review.
+                            {% endif %}
                         {% else %}
+                            Not found reviews
                         {% endif %}
                         <a class="pull-right" href="#reviews">View all reviews</a>
                     </div>
                     <div class="datasheet p-3 mb-2 bg-info text-white">
-                        <a href="" class="text-white">
-                            <i class="fa fa-file-text"></i> Download DataSheet
-                        </a>
+                        <a href="" class="text-white"><i class="fa fa-file-text"></i>Download DataSheet</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <!-- Synopsis -->
         <div class="col-12">
             <div class="card border-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase">
                     <i class="fa fa-align-justify"></i> Synopsis</div>
-                <div class="card-body"><p class="card-text">{{book.synopsis}}</p></div>
+                <div class="card-body">
+                    <p class="card-text">
+                    {% if book.synopsis %} 
+                        {{book.synopsis}}
+                    {% else %} 
+                        Not found synopsis of book. 
+                    {% endif%}
+                    </p>
+                </div>
             </div>
         </div>
         <div class="col-12">
-        <!-- Book information -->
             <div class="card border-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase">
                     <i class="fa fa-align-justify"></i> Book information</div>
                 <div class="card-body">
                     <p class="card-text">
-                        <strong>Author(s):</strong> 
+                        <strong>Authors:</strong> 
                         {% for author in book.author.all %}
-                            <p class="card-text">{{author}}, </p>
+                            <p class="card-text">
+                                {% if author %} 
+                                    {{author}}, 
+                                {% else %} 
+                                    Not found author. 
+                                {% endif%}
+                            </p>
                         {% endfor %}
                     </p>
                     <p class="card-text">
-                        <strong>Num of pages:</strong> {{book.num_of_pages}}
+                        <strong>Num of pages:</strong> 
+                        {% if book.num_of_pages %} 
+                            {{book.num_of_pages}} 
+                        {% else %} 
+                            Not found number of pages of book.
+                        {% endif%}
                     </p>
                     <p class="card-text">
-                        <strong>Publishing company:</strong> {{book.publishing_company}}
+                        <strong>Publishing company:</strong> 
+                        {% if book.publishing_company %}
+                            {{book.publishing_company}}
+                        {% else %}
+                            Not found publishing company of book. 
+                        {% endif %}
                     </p>
                     <p class="card-text">
-                        <strong>Language:</strong> {{book.language}}
+                        <strong>Language:</strong>
+                        {% if book.language %}
+                            {{book.language}}
+                        {% else %}
+                            Not found language of book. 
+                        {% endif %}
                     </p>
                     <p class="card-text">
-                        <strong>ISBN:</strong> {{book.isbn}}
+                        <strong>ISBN:</strong> 
+                        {% if book.isbn %}
+                            {{book.isbn}}
+                        {% else %}
+                            Not found isbn of book. 
+                        {% endif %}
                     </p>
                     <p class="card-text">
-                        <strong>Dimensions of the book:</strong> {{book.dimensions_of_the_book}}
+                        <strong>Dimensions of the book:</strong> 
+                        {% if book.dimensions_of_the_book %}
+                            {{book.dimensions_of_the_book}}
+                        {% else %}
+                            Not found dimensions of the book of book. 
+                        {% endif %}
                     </p>
                 </div>
             </div>
         </div>
-        <!-- Reviews -->
         <div class="col-12" id="reviews">
             <div class="card border-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-comment"></i> Reviews</div>
@@ -180,8 +223,22 @@
                             <span class="fa fa-star"></span>
                         {% else %}
                         {% endif %}
-                        by <strong>{{breview.user.first_name}}</strong>
-                        <p class="blockquote"><p class="mb-0">{{breview.comment}}</p></p>
+                        by <strong>
+                        {% if breview.user.first_name %} 
+                            {{breview.user.first_name}}
+                        {% else %}
+                            Not found name user of review.
+                        {% endif %}
+                        </strong>
+                        <p class="blockquote">
+                            <p class="mb-0">
+                                {% if breview.comment %} 
+                                    {{breview.comment}}
+                                {% else %}
+                                    Not found comment of review.
+                                {% endif %}
+                            </p>
+                        </p>
                         <hr>
                     </div>
                 {% endfor %}

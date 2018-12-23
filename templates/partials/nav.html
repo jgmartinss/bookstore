@@ -6,30 +6,25 @@
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}">Bookstore</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span> 
         </button>
-
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
-              {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'author-list' %}">Author(s)</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'book-list' %}">Books</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'publishing-list' %}">Publishers</a>
-                </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'author-list' %}">Authors</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'book-list' %}">Books</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'publishing-list' %}">Publishers</a></li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.email}}</a>
-                  <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                  </div>
+                    <a class="nav-link dropdown-toggle" 
+                       href="#" id="dropdown01" data-toggle="dropdown" 
+                       aria-haspopup="true" aria-expanded="false">{{user.email}}</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
                 </li>
-                {% else %}
+            {% else %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'sign-in' %}">Sign In <span class="sr-only">(current)</span></a>
                 </li>
@@ -45,9 +40,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'publishing-list' %}">Publishers</a>
                 </li>
-                {% endif %}
+            {% endif %}
             </ul>
-
             <form class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
                     <input type="text" class="form-control" placeholder="Search...">
@@ -67,10 +61,10 @@
 </nav>
 
 <section class="jumbotron text-center">
-  <div class="container">
-    <h1 class="jumbotron-heading">E-COMMERCE BOOTSTRAP THEME</h1>
-    <p class="lead text-muted mb-0">Simple theme for e-commerce buid with Bootstrap 4.0.0. Pages available : home, category, product, cart & contact</p>
-  </div>
+    <div class="container">
+        <h1 class="jumbotron-heading">E-COMMERCE BOOTSTRAP THEME</h1>
+        <p class="lead text-muted mb-0">Simple theme for e-commerce buid with Bootstrap 4.0.0. Pages available : home, category, product, cart & contact</p>
+    </div>
 </section>
 
 {% endblock %}

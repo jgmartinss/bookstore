@@ -15,7 +15,7 @@ help:
 run:
 	python3 manage.py runserver
 createuser:
-	python3 manage.py createsuperuser
+	python3 manage.py createsuperuser --email='admin@email.com' 
 migrations:
 	python3 manage.py makemigrations
 migrate:
@@ -47,7 +47,8 @@ populate_catalog:
 	python manage.py generate_authors 20
 	python manage.py generate_categories 10
 	python manage.py generate_publishers 10
-	python manage.py generate_books 20
+	python manage.py generate_books 30
+populate_db: populate_accounts populate_coupons populate_newslatter populate_catalog populate_customers
 
 
 
