@@ -197,6 +197,7 @@
             <div class="card border-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-comment"></i> Reviews</div>
                 <div class="card-body">
+                {% if book_review %}
                 {% for breview in book_review%}
                     <div class="review">
                         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
@@ -242,6 +243,9 @@
                         <hr>
                     </div>
                 {% endfor %}
+                {% else %}
+                    Not foun review
+                {% endif %}
                 </div>
             </div>
         </div>
