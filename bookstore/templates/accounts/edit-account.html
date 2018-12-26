@@ -9,17 +9,17 @@
         <div class="card w-85">
             <div class="card-body">
                 <h5 class="card-title">Edit account</h5>
-				<div class="body">
-				 	<form method="POST" action="{% url 'account:customer-account-edit' token=user.token %}" class="form-signin">
-				    	{% csrf_token %}
-				    	{{ form|crispy }}
-				    	<button class="btn btn-lg btn-primary btn-block" type="submit">SAVE CHANGES</button>
-				  </form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<br/>
+                <div class="body">
+                    <form method="POST" action="{% url 'account:customer-account-edit' token=user.token %}" class="form-signin">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">SAVE CHANGES</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
 </div>
 
 {% endblock dashboard %}
