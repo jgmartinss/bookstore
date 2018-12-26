@@ -6,6 +6,8 @@ from django.utils.text import slugify
 from factory.django import DjangoModelFactory
 from faker import Faker
 
+from bookstore.apps.accounts.factories import UserFactory
+
 from . import models
 from . import choices
 
@@ -94,3 +96,15 @@ class BookFactory(DjangoModelFactory):
         authors = models.Author.objects.all()
         for author in random.choices(authors, k=random.randint(1, len(authors))):
             self.author.add(author)
+
+
+class BookReviewFactory(DjangoModelFactory):
+    class Meta:
+        model = models.BookReview
+
+    book = factory.SubFactory(BookFactory)
+    comment = factory.Faker('sentence')
+    user = factory.SubFactory(UserFactory)
+    number_of_stars = factory.Iterator(
+        [choices.ONE, choices.TWO, choices.THREE, choices.FOUR, choices.FIVE]
+    )

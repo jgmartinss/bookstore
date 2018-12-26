@@ -36,9 +36,7 @@ diagram:
 	python manage.py graph_models -a -o diagram.png
 populate_accounts:
 	python manage.py generate_users 20
-populate_customers:
 	python manage.py generate_address 20
-	python manage.py generate_reviews 30
 populate_coupons:
 	python manage.py generate_coupons 15
 populate_newslatter:
@@ -48,7 +46,8 @@ populate_catalog:
 	python manage.py generate_categories 10
 	python manage.py generate_publishers 10
 	python manage.py generate_books 30
-populate_db: populate_accounts populate_coupons populate_newslatter populate_catalog populate_customers
+	python manage.py generate_reviews 30
+populate_db: populate_accounts populate_coupons populate_newslatter populate_catalog
 
 
 

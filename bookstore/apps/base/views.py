@@ -3,7 +3,6 @@ from django.shortcuts import render
 from django.views import generic
 
 from bookstore.apps.checkout.forms import CartAddProductForm
-
 from bookstore.apps.catalog.models import Book
 
 

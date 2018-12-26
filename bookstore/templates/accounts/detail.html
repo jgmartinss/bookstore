@@ -1,0 +1,59 @@
+{% extends 'accounts/dashboard.html' %}
+{% load staticfiles %}
+{% block dashboard %}
+
+<div class="col-sm-8">
+    <div class="card">
+        <div class="card w-85">
+            <div class="card-body">
+                <h5 class="card-title">My dashboard</h5>
+                {% if user_information %}
+                    {% for user in user_information %}
+                        <p class="card-text">
+                            <strong>Hello, {{user.first_name}} {{user.last_name}}</strong>
+                        </p>
+                        <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
+                    {% endfor %}
+                {% else %}
+                    Not found user information
+                {% endif %}
+            </div>
+        </div>
+        <div class="card w-85">
+            <div class="card-body">
+                <h5 class="card-title">Contact information</h5>
+                {% if user_information %}
+                    {% for user in user_information %}
+                        <p class="card-text">
+                            {{user.first_name}} {{user.last_name}} -
+                            <i>Phone:</i> {{user.phone_number}} - 
+                            <i>Tax/VAT:</i> {{user.tax_vat_number}} - 
+                            <i>Company:</i> {{user.company}}
+                        </p>
+                        <p class="card-text">
+                            <i>Email: </i>{{user.email}}<a href=""><i> Change account</i></a>
+                        </p>
+                    {% endfor %}
+                {% else %}
+                    Not found user information
+                {% endif %}
+            </div>
+        </div>
+        <div class="card w-85">
+            <div class="card-body">
+                <h5 class="card-title">Default Shipping Address</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Button</a>
+            </div>
+        </div>
+        <div class="card w-85">
+            <div class="card-body">
+                <h5 class="card-title">Default Billing Address</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Button</a>
+            </div>
+        </div>
+    </div><br/>
+</div>
+
+{% endblock dashboard %}

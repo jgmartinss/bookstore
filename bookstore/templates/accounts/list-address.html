@@ -1,0 +1,40 @@
+{% extends 'accounts/dashboard.html' %}
+{% load staticfiles %}
+{% block title %} {{ block.super }} - Address book {% endblock %}
+{% block dashboard %}
+
+<div class="col-sm-8">
+    <div class="card">
+        <div class="card w-85">
+            <div class="card-body">
+                <h5 class="card-title">Address book 
+                    <a style="float: right"href="{% url 'account:new-address' %}">new</a>
+                </h5>
+                {% if user_address %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Postcode</th>
+                            <th scope="col">Streets</th>
+                            <th scope="col">Region</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for address in user_address %}
+                        <tr>
+                            <td>{{address.postal_code}}</td>
+                            <td>{{address.streets_in_line}}</td>
+                            <td>{{address.region_in_line}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                {% endif %}
+            </div>
+        </div>
+    </div><br/>
+</div>
+
+{% endblock dashboard %}

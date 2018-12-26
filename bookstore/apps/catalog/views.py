@@ -2,7 +2,6 @@ from django.shortcuts import  get_object_or_404
 
 from django.views import generic
 
-from bookstore.apps.customers.models import BookReview
 from bookstore.apps.checkout.forms import CartAddProductForm
 
 from . import models
@@ -29,7 +28,7 @@ class BookDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(BookDetailView, self).get_context_data(**kwargs)
-        bookreviews = BookReview.objects.all()
+        bookreviews = models.BookReview.objects.all()
         bookimages = models.BookImages.objects.all()
         cart_product_form = CartAddProductForm()
         context['book_images'] = bookimages.filter(book=self.object)[:1]

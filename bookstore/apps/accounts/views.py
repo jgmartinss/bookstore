@@ -1,3 +1,5 @@
+from django.shortcuts import render, get_object_or_404
+
 from django.urls import reverse_lazy
 
 from django.utils.http import is_safe_url
@@ -23,14 +25,14 @@ class SignUpView(generic.CreateView):
     model = models.User
     form_class = forms.RegisterUserForm
     template_name = 'accounts/sign_up.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('base:index')
 
 
 class SignInView(generic.FormView):
     form_class = forms.LoginUserForm
     template_name = 'accounts/sign_in.html'
     redirect_field_name = REDIRECT_FIELD_NAME
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('base:index')
 
     @method_decorator(sensitive_post_parameters('password'))
     @method_decorator(csrf_protect)
@@ -59,3 +61,59 @@ class LogoutView(LoginRequiredMixin, generic.RedirectView):
     def get(self, request, *args, **kwargs):
         auth_logout(request)
         return super(LogoutView, self).get(request, *args, **kwargs)
+
+
+class AccountView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'accounts/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AccountView, self).get_context_data(**kwargs)
+        context['user_information'] = self.get_user_information
+        # context['shipping_address_information'] = self.get_shipping_address_information
+        # context['billing_address_information'] = self.get_billing_address_information
+        return context
+
+    def get_user_information(self):
+        return models.User.objects.filter(id=self.request.user.id)
+
+    # def get_shipping_address_information(self):
+    #     return models.DefaultShippingAddress.objects.filter(user__id=self.request.user.id)[:1]
+
+    # def get_billing_address_information(self):
+    #     return models.DefaultBillingAddress.objects.filter(user__id=self.request.user.id)[:1]
+
+
+
+class AddressCreateView(LoginRequiredMixin, generic.CreateView):
+    model = models.Address
+    form_class = forms.AddressForm
+    template_name = 'accounts/new-address.html'
+    success_url = reverse_lazy('account:list-address')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(AddressCreateView, self).form_valid(form)
+
+
+class AddressListView(LoginRequiredMixin, generic.ListView):
+    model = models.Address
+    context_object_name = 'user_address'
+    template_name = 'accounts/list-address.html'
+
+    def get_queryset(self, **kwargs):
+        address = models.Address.objects.all()
+        return address.filter(user=self.request.user).order_by('-created')
+
+
+class AccountUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = models.User
+    form_class = forms.AccountForm
+    template_name = 'accounts/edit-account.html'
+
+    def get_object(self):
+        _token = self.kwargs.get("token")
+        return get_object_or_404(models.User, token=_token)
+
+
+
+

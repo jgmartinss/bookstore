@@ -20,8 +20,8 @@ INSTALLED_APPS.append('django_extensions')
 MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware', )
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (os.path.join(APP_ROOT, 'static'),)
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(APP_ROOT, 'media')

@@ -6,7 +6,7 @@
 
 <link href="{% static 'css/accounts/style.css' %}" rel="stylesheet">
 <div class="body">
-    <form method="POST" action="{% url 'sign-in' %}" class="form-signin">
+    <form method="POST" action="{% url 'account:sign-in' %}" class="form-signin">
         <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
         {% csrf_token %}

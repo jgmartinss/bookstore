@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from bookstore.apps.customers import factories, models
+from bookstore.apps.catalog import factories, models
 
 
 class Command(BaseCommand):

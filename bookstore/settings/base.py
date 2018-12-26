@@ -4,9 +4,9 @@ from decouple import config, Csv
 from dj_database_url import parse as db_url
 
 
-BASE_DIR = os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-)
+APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(APP_ROOT))
 
 SECRET_KEY = config('SECRET_KEY')
 
@@ -17,7 +17,7 @@ DEFAULT_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.humanize',
+    'django.contrib.humanize', 
 ]
 
 THIRD_PARTY_APPS = [
@@ -35,7 +35,6 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'bookstore.apps.accounts',
     'bookstore.apps.catalog',
-    'bookstore.apps.customers',
     'bookstore.apps.newsletter',
     'bookstore.apps.coupons',
     'bookstore.apps.checkout',
@@ -68,24 +67,16 @@ ROOT_URLCONF = 'bookstore.urls'
 WSGI_APPLICATION = 'bookstore.wsgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(APP_ROOT, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,7 +90,7 @@ TEMPLATES = [
     },
 ]
 
-LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
+LOCALE_PATHS = (os.path.join(APP_ROOT, 'locale'),)
 
 LANGUAGE_CODE = 'en-us'
 

@@ -29,6 +29,20 @@ AVAILABILITY_OF_STOCK = (
     (INSTOCK, _('In stock')),
 )
 
+ONE = 1
+TWO = 2
+THREE = 3
+FOUR = 4
+FIVE = 5
+
+NUMBER_OF_STAR = (
+    (ONE, _('1 Star')),
+    (TWO, _('2 Star')),
+    (THREE, _('3 Star')),
+    (FOUR, _('4 Star')),
+    (FIVE, _('5 Star')),
+)
+
 LANGUAGES = [
     ('bg', _('Bulgarian')),
     ('cs', _('Czech')),

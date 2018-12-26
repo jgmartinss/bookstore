@@ -28,4 +28,17 @@ class UserAdmin(admin.ModelAdmin):
     )
 
 
+class AddressAdmin(admin.ModelAdmin):
+    model = models.Address
+    ordering = ('user__first_name', '-created',)
+    search_fields = ('user__email', 'postal_code',)
+    list_display = ('postal_code', 'streets_in_line', 'region_in_line')
+    list_display_links = ['postal_code']
+    date_hierarchy = 'created'
+
+
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Address, AddressAdmin)
+admin.site.register(models.DefaultShippingAddress)
+admin.site.register(models.DefaultBillingAddress)
+

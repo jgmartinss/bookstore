@@ -1,7 +1,10 @@
 from django.utils.translation import gettext_lazy as _
 
 
+MALE = 'male'
+FEMALE = 'female'
+
 GENDER = (
-    ('male', _('Male')),
-    ('female', _('Female')),
+    (MALE, _('Male')),
+    (FEMALE, _('Female')),
 )

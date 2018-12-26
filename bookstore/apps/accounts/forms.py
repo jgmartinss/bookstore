@@ -11,6 +11,8 @@ from django.contrib.auth.forms import (
     ReadOnlyPasswordHashField
 )
 
+from django_countries.widgets import CountrySelectWidget
+
 from . import models
 
 
@@ -91,3 +93,25 @@ class LoginUserForm(AuthenticationForm):
             'invalid': _('Please enter your password valid')
         },
     )
+
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = models.Address
+        fields = [
+            'street_1', 'street_2',
+            'city', 'state',
+            'country', 'postal_code'
+        ]
+        widgets = {
+            'country': CountrySelectWidget()
+        }
+
+
+class AccountForm(forms.ModelForm):
+    class Meta:
+        model = models.User
+        fields = [
+            'email', 'first_name', 'last_name', 'phone_number',
+            'tax_vat_number', 'company', 'gender', 'birthday'
+        ]

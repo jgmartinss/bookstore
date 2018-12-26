@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+{% include "partials/nav.html" %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card" >
+                <div class="card-header">My account</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <a href=""><li class="list-group-item">Account dashboard</li></a>
+                        <a href=""><li class="list-group-item">Account information</li></a>
+                        <a href=""><li class="list-group-item">Address book</li></a>
+                        <a href=""><li class="list-group-item">My orders</li></a>
+                        <a href=""><li class="list-group-item">My product reviews</li></a>
+                        <a href=""><li class="list-group-item">Subscribe to newsletter</li></a>
+                    </ul>
+                </div> 
+            </div>
+        </div>
+        {% block dashboard %}
+        {% endblock %}
+    </div>
+</div>
+
+{% include "partials/footer.html" %}
+{% endblock content %}
