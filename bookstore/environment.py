@@ -1,10 +1,7 @@
-ENVIRONMENT = 'development'
-# ENVIRONMENT = 'production'
-
-SETTINGS_MODULE = 'bookstore.settings.development'
+from decouple import config
 
 
-if ENVIRONMENT == 'development':
+if config('ENVIRONMENT') == 'dev':
     SETTINGS_MODULE = 'bookstore.settings.development'
-if ENVIRONMENT == 'production':
+if config('ENVIRONMENT') == 'prod':
     SETTINGS_MODULE = 'bookstore.settings.production'
