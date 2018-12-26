@@ -1,0 +1,518 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-26 13:08-0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: bookstore/apps/accounts/choices.py:8
+msgid "Male"
+msgstr "Masculino"
+
+#: bookstore/apps/accounts/choices.py:9
+msgid "Female"
+msgstr "Feminino"
+
+#: bookstore/apps/accounts/forms.py:34 bookstore/apps/accounts/forms.py:88
+msgid "password"
+msgstr "senha"
+
+#: bookstore/apps/accounts/forms.py:45
+msgid "password confirmation"
+msgstr "confirmar senha"
+
+#: bookstore/apps/accounts/forms.py:74
+msgid "email"
+msgstr "email"
+
+#: bookstore/apps/accounts/forms.py:78
+msgid "Please enter your email"
+msgstr "Por favor introduza o seu e-mail"
+
+#: bookstore/apps/accounts/forms.py:79
+msgid "Please enter your email valid"
+msgstr "Por favor insira o seu email válido"
+
+#: bookstore/apps/accounts/forms.py:92
+msgid "Please enter your password"
+msgstr "Por favor, insira sua senha"
+
+#: bookstore/apps/accounts/forms.py:93
+msgid "Please enter your password valid"
+msgstr "Por favor digite sua senha válida"
+
+#: bookstore/apps/accounts/models.py:20 bookstore/apps/newsletter/models.py:9
+msgid "Email"
+msgstr "Email"
+
+#: bookstore/apps/accounts/models.py:21
+msgid "First Name"
+msgstr "Nome"
+
+#: bookstore/apps/accounts/models.py:22
+msgid "Last Name"
+msgstr "Sobrenome"
+
+#: bookstore/apps/accounts/models.py:23
+msgid "TAX/Vat Number"
+msgstr "CPF"
+
+#: bookstore/apps/accounts/models.py:25
+msgid "Phone"
+msgstr "Telefone"
+
+#: bookstore/apps/accounts/models.py:31
+msgid "Company"
+msgstr "Empresa"
+
+#: bookstore/apps/accounts/models.py:37
+msgid "Gender"
+msgstr "Gênero"
+
+#: bookstore/apps/accounts/models.py:43
+msgid "Birthday"
+msgstr "Data de nascimento"
+
+#: bookstore/apps/accounts/models.py:55 bookstore/apps/accounts/models.py:87
+#: bookstore/apps/accounts/models.py:118 bookstore/apps/accounts/models.py:141
+#: bookstore/apps/catalog/models.py:194 bookstore/apps/orders/models.py:11
+msgid "User"
+msgstr "Usuário"
+
+#: bookstore/apps/accounts/models.py:56
+msgid "Users"
+msgstr "Usuários"
+
+#: bookstore/apps/accounts/models.py:91
+msgid "Street 1"
+msgstr "Rua"
+
+#: bookstore/apps/accounts/models.py:92
+msgid "Street 2"
+msgstr "Bairro"
+
+#: bookstore/apps/accounts/models.py:93
+msgid "City"
+msgstr "Cidade"
+
+#: bookstore/apps/accounts/models.py:94
+msgid "State"
+msgstr "Estado"
+
+#: bookstore/apps/accounts/models.py:95
+msgid "Country"
+msgstr "País"
+
+#: bookstore/apps/accounts/models.py:96
+msgid "Post code"
+msgstr "CEP"
+
+#: bookstore/apps/accounts/models.py:99 bookstore/apps/accounts/models.py:100
+#: bookstore/apps/accounts/models.py:124 bookstore/apps/accounts/models.py:147
+msgid "Address"
+msgstr "Endereço"
+
+#: bookstore/apps/accounts/models.py:130 bookstore/apps/orders/models.py:16
+msgid "Shipping Address"
+msgstr "Endereço de entrega"
+
+#: bookstore/apps/accounts/models.py:131
+msgid "Shipping Addresss"
+msgstr "Endereço de entrega"
+
+#: bookstore/apps/accounts/models.py:153 bookstore/apps/orders/models.py:22
+msgid "Billing Address"
+msgstr "Endereço de cobrança"
+
+#: bookstore/apps/accounts/models.py:154
+msgid "Billing Addresss"
+msgstr "Endereço de cobrança"
+
+#: bookstore/apps/catalog/abstract_models.py:13
+msgid "Is active?"
+msgstr "Está ativo?"
+
+#: bookstore/apps/catalog/abstract_models.py:17
+msgid "Is featured?"
+msgstr "Está em destaque?"
+
+#: bookstore/apps/catalog/abstract_models.py:21
+msgid "Visible where?"
+msgstr "Visível onde?"
+
+#: bookstore/apps/catalog/abstract_models.py:28
+msgid "Special price from date"
+msgstr "Preço especial a partir de"
+
+#: bookstore/apps/catalog/abstract_models.py:33
+msgid "Special price to date"
+msgstr "Preço especial até hoje"
+
+#: bookstore/apps/catalog/abstract_models.py:38
+msgid "Show real price"
+msgstr "Mostrar preço real"
+
+#: bookstore/apps/catalog/abstract_models.py:42
+msgid "Availability of stock"
+msgstr "Disponibilidade de estoque"
+
+#: bookstore/apps/catalog/abstract_models.py:46
+msgid "Quantity"
+msgstr "Quantidade"
+
+#: bookstore/apps/catalog/abstract_models.py:50
+msgid "Inventory maintenance unit"
+msgstr "Unidade de manutenção de estoque"
+
+#: bookstore/apps/catalog/abstract_models.py:54
+msgid "Quantity for item status switch to out of stock"
+msgstr "Qtd para status de item mudar para fora de estoque"
+
+#: bookstore/apps/catalog/abstract_models.py:58
+msgid "MAX/Quantity in the shopping cart"
+msgstr "MAX/Qtd no carrinho de compras"
+
+#: bookstore/apps/catalog/abstract_models.py:62
+msgid "Notify when stock is exhausted?"
+msgstr "Notificar quando o estoque estiver esgotado?"
+
+#: bookstore/apps/catalog/abstract_models.py:66
+msgid "Weight"
+msgstr "Peso"
+
+#: bookstore/apps/catalog/abstract_models.py:71
+msgid "Length"
+msgstr "Comprimento"
+
+#: bookstore/apps/catalog/abstract_models.py:72
+#: bookstore/apps/catalog/abstract_models.py:76
+#: bookstore/apps/catalog/abstract_models.py:80
+msgid "Measured in centimeters."
+msgstr "Medido em centímetros."
+
+#: bookstore/apps/catalog/abstract_models.py:75
+msgid "Height"
+msgstr "Altura"
+
+#: bookstore/apps/catalog/abstract_models.py:79
+msgid "Width"
+msgstr "Largura"
+
+#: bookstore/apps/catalog/admin.py:145
+msgid "Author(s)"
+msgstr "Autores"
+
+#: bookstore/apps/catalog/admin.py:151 bookstore/apps/catalog/models.py:73
+msgid "Categories"
+msgstr "Categorias"
+
+#: bookstore/apps/catalog/choices.py:9
+msgid "Catalog"
+msgstr "Catálogo"
+
+#: bookstore/apps/catalog/choices.py:10 bookstore/apps/catalog/choices.py:20
+msgid "Search"
+msgstr "Busca"
+
+#: bookstore/apps/catalog/choices.py:11
+msgid "Catalog, Search"
+msgstr "Catálogo e Busca"
+
+#: bookstore/apps/catalog/choices.py:19
+msgid "In cart"
+msgstr "No carrinho"
+
+#: bookstore/apps/catalog/choices.py:21
+msgid "Before confirming order"
+msgstr "Antes de confirmar a ordem"
+
+#: bookstore/apps/catalog/choices.py:28
+msgid "Out of stock"
+msgstr "Fora de estoque"
+
+#: bookstore/apps/catalog/choices.py:29
+msgid "In stock"
+msgstr "Em estoque"
+
+#: bookstore/apps/catalog/choices.py:39
+msgid "1 Star"
+msgstr "1 Estrela"
+
+#: bookstore/apps/catalog/choices.py:40
+msgid "2 Star"
+msgstr "2 Estrelas"
+
+#: bookstore/apps/catalog/choices.py:41
+msgid "3 Star"
+msgstr "4 Estrelas"
+
+#: bookstore/apps/catalog/choices.py:42
+msgid "4 Star"
+msgstr "4 Estrelas"
+
+#: bookstore/apps/catalog/choices.py:43
+msgid "5 Star"
+msgstr "5 Estrelas"
+
+#: bookstore/apps/catalog/choices.py:47
+msgid "Bulgarian"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:48
+msgid "Czech"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:49
+msgid "German"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:50
+msgid "English"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:51
+msgid "Spanish"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:52
+msgid "Persian (Iran)"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:53
+msgid "French"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:54
+msgid "Hungarian"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:55
+msgid "Italian"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:56
+msgid "Japanese"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:57
+msgid "Korean"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:58
+msgid "Norwegian"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:59
+msgid "Dutch"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:60
+msgid "Polish"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:61
+msgid "Portuguese (Brazil)"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:62
+msgid "Romanian"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:63
+msgid "Russian"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:64
+msgid "Slovak"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:65
+msgid "Turkish"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:66
+msgid "Ukrainian"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:67
+msgid "Vietnamese"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:68
+msgid "Chinese"
+msgstr ""
+
+#: bookstore/apps/catalog/choices.py:69
+msgid "Chinese (Taiwan)"
+msgstr ""
+
+#: bookstore/apps/catalog/models.py:19 bookstore/apps/catalog/models.py:36
+#: bookstore/apps/catalog/models.py:58
+msgid "Name"
+msgstr "Nome"
+
+#: bookstore/apps/catalog/models.py:20 bookstore/apps/catalog/models.py:38
+#: bookstore/apps/catalog/models.py:67 bookstore/apps/catalog/models.py:98
+msgid "Slug"
+msgstr "Slug"
+
+#: bookstore/apps/catalog/models.py:24 bookstore/apps/catalog/models.py:111
+msgid "Publishing Company"
+msgstr "Editora"
+
+#: bookstore/apps/catalog/models.py:25
+msgid "Publishers"
+msgstr "Editoras"
+
+#: bookstore/apps/catalog/models.py:37
+msgid "About"
+msgstr "Sobre"
+
+#: bookstore/apps/catalog/models.py:42 bookstore/apps/catalog/models.py:101
+msgid "Author"
+msgstr "Autor"
+
+#: bookstore/apps/catalog/models.py:43
+msgid "Authors"
+msgstr "Autors"
+
+#: bookstore/apps/catalog/models.py:61
+msgid "Sub category"
+msgstr "Sub categoria"
+
+#: bookstore/apps/catalog/models.py:72 bookstore/apps/catalog/models.py:106
+msgid "Category"
+msgstr "Categoria"
+
+#: bookstore/apps/catalog/models.py:96
+msgid "Title"
+msgstr "Título"
+
+#: bookstore/apps/catalog/models.py:97
+msgid "Original Title"
+msgstr "Título Original"
+
+#: bookstore/apps/catalog/models.py:115
+msgid "ISBN"
+msgstr "ISBN"
+
+#: bookstore/apps/catalog/models.py:116
+msgid "Synopsis"
+msgstr "Sinopse"
+
+#: bookstore/apps/catalog/models.py:118
+msgid "Number of pages"
+msgstr "Número de páginas"
+
+#: bookstore/apps/catalog/models.py:121
+msgid "Hardback?"
+msgstr "Capa dura?"
+
+#: bookstore/apps/catalog/models.py:123
+msgid "Language"
+msgstr "Idioma"
+
+#: bookstore/apps/catalog/models.py:130 bookstore/apps/catalog/models.py:163
+#: bookstore/apps/catalog/models.py:187
+msgid "Book"
+msgstr "Livro"
+
+#: bookstore/apps/catalog/models.py:131
+msgid "Books"
+msgstr "Livros"
+
+#: bookstore/apps/catalog/models.py:167
+msgid "Image"
+msgstr "Imagem"
+
+#: bookstore/apps/catalog/models.py:173
+msgid "Book Image"
+msgstr "Imagem do Livro"
+
+#: bookstore/apps/catalog/models.py:174
+msgid "Book Images"
+msgstr "Imagens dos Livros"
+
+#: bookstore/apps/catalog/models.py:191
+msgid "Comment"
+msgstr "Comentários"
+
+#: bookstore/apps/catalog/models.py:199
+msgid "Stars"
+msgstr "Estrelas"
+
+#: bookstore/apps/catalog/models.py:206
+msgid "Book Review"
+msgstr "Revisão do livro"
+
+#: bookstore/apps/catalog/models.py:207
+msgid "Book Reviews"
+msgstr "Revisão dos livros"
+
+#: bookstore/apps/coupons/forms.py:7 bookstore/apps/coupons/models.py:25
+msgid "Coupon"
+msgstr "Coupon"
+
+#: bookstore/apps/coupons/models.py:11
+msgid "Code"
+msgstr "Código"
+
+#: bookstore/apps/coupons/models.py:12
+msgid "Valid from"
+msgstr "Válido de"
+
+#: bookstore/apps/coupons/models.py:13
+msgid "Valid to"
+msgstr "Valido para"
+
+#: bookstore/apps/coupons/models.py:15
+msgid "Discount"
+msgstr "Desconto"
+
+#: bookstore/apps/coupons/models.py:21
+msgid "Is Active?"
+msgstr "Está ativo?"
+
+#: bookstore/apps/coupons/models.py:26
+msgid "Coupons"
+msgstr "Coupons"
+
+#: bookstore/apps/newsletter/models.py:10
+msgid "Full name"
+msgstr "Nome completo"
+
+#: bookstore/apps/newsletter/models.py:15
+msgid "Subscribe"
+msgstr "Inscrito"
+
+#: bookstore/apps/newsletter/models.py:16
+msgid "Subscribes"
+msgstr "Inscritos"
+
+#: bookstore/apps/orders/models.py:31
+msgid "Order"
+msgstr "Pedido"
+
+#: bookstore/apps/orders/models.py:32
+msgid "Orders"
+msgstr "Pedidos"
+
+#: bookstore/apps/orders/models.py:55
+msgid "Order item"
+msgstr "Item pedido"
+
+#: bookstore/apps/orders/models.py:56
+msgid "Order items"
+msgstr "Itens pedidos"

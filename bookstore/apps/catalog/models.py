@@ -98,7 +98,7 @@ class Book(abstract_models.Product):
     slug = models.SlugField(_('Slug'), unique=True, blank=True)
     author = models.ManyToManyField(
         'catalog.Author',
-        verbose_name=_('Autor'),
+        verbose_name=_('Author'),
         related_name='book_authors'
     )
     category = models.ManyToManyField(

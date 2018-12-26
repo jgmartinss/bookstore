@@ -92,9 +92,9 @@ TEMPLATES = [
 
 LOCALE_PATHS = (os.path.join(APP_ROOT, 'locale'),)
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-BR'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 

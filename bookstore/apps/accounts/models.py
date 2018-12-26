@@ -88,12 +88,12 @@ class Address(TimeStampedModel):
         related_name='user_address',
         on_delete=models.CASCADE
     )
-    street_1 = models.CharField(max_length=145)
-    street_2 = models.CharField(max_length=145)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=20)
-    country = CountryField(blank_label='(select country)')
-    postal_code = models.CharField(max_length=20)
+    street_1 = models.CharField(_('Street 1'), max_length=145)
+    street_2 = models.CharField(_('Street 2'), max_length=145)
+    city = models.CharField(_('City'), max_length=100)
+    state = models.CharField(_('State'), max_length=20)
+    country = CountryField(_('Country'), blank_label='(select country)')
+    postal_code = models.CharField(_('Post code'), max_length=20)
 
     class Meta:
         verbose_name = _('Address')

@@ -21,7 +21,7 @@ class RegisterUserForm(UserCreationForm):
         required=True,
         widget=forms.TextInput(
             attrs={
-                'placeholder': _('YYYY-MM-DD'),
+                'placeholder': 'YYYY-MM-DD',
             }
         ),
     )
