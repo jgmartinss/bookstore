@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block title %} My account {% endblock %}
+{% block title %} Configurações {% endblock %}
 {% block content %}
 {% include "partials/nav.html" %}
 
@@ -8,21 +8,21 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="card" >
-                <div class="card-header">My account</div>
+                <div class="card-header">Configurações</div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <a href="{% url 'account:customer-account' %}">
-                            <li class="list-group-item">Account dashboard</li>
+                            <li class="list-group-item">Painel inicial</li>
                         </a>
                         <a href="{% url 'account:customer-account-edit' token=user.token %}">
-                            <li class="list-group-item">Account information</li>
+                            <li class="list-group-item">Editar conta</li>
                         </a>
                         <a href="{% url 'account:list-address' %}">
-                            <li class="list-group-item">Address book</li>
+                            <li class="list-group-item">Livro de endereços</li>
                         </a>
-                        <a href=""><li class="list-group-item">My orders</li></a>
-                        <a href=""><li class="list-group-item">My product reviews</li></a>
-                        <a href=""><li class="list-group-item">Subscribe to newsletter</li></a>
+                        <a href=""><li class="list-group-item">Meu pedidos</li></a>
+                        <a href=""><li class="list-group-item">Minhas avaliações</li></a>
+                        <a href=""><li class="list-group-item">Assinar Boletim</li></a>
                     </ul>
                 </div> 
             </div>

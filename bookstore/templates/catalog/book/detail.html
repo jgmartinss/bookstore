@@ -31,14 +31,14 @@
             <div class="card bg-light mb-3">
                 <div class="card-body">
                     {% if book.special_price %}
-                        <p class="price">{{book.special_price}}</p>
-                        <p class="price_discounted">{{book.price}}</p>
+                        <p class="price">${{book.special_price}}</p>
+                        <p class="price_discounted">${{book.price}}</p>
                     {% else %}
-                        <p class="price">{{book.price}}</p>
+                        <p class="price">${{book.price}}</p>
                     {% endif %}
                     <form action="{% url 'cart_add' product_id=book.id %}" method="post">
                         <div class="form-group">
-                            <label>Quantity:</label>
+                            <label>Quantidade:</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-field="">
@@ -53,25 +53,12 @@
                                 </div>
                             </div>
                         </div>
-                        <input class="btn btn-success btn-lg btn-block text-uppercase" class="fa fa-shopping-cart" type="submit" value="Add to cart">
+                        <input class="btn btn-success btn-lg btn-block text-uppercase" class="fa fa-shopping-cart" type="submit" value="Comprar">
                         {% csrf_token %}
                     </form>
-                    <div class="product_rassurance">
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <i class="fa fa-truck fa-2x"></i><br/>Fast delivery
-                            </li>
-                            <li class="list-inline-item">
-                                <i class="fa fa-credit-card fa-2x"></i><br/>Secure payment
-                            </li>
-                            <li class="list-inline-item">
-                                <i class="fa fa-phone fa-2x"></i><br/>+33 1 22 54 65 60
-                            </li>
-                        </ul>
-                    </div>
                     <div class="reviews_product p-3 mb-2 ">
                         {% if book.get_count_reviews %}
-                            {{book.get_count_reviews}} reviews
+                            {{book.get_count_reviews}} Avaliação(s)
                             {% if book.get_avg_ratings == 1 %}
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-o"></i>
@@ -106,12 +93,12 @@
                                 The book can not review.
                             {% endif %}
                         {% else %}
-                            Not found reviews
+                            Nenhuma avaliação
                         {% endif %}
-                        <a class="pull-right" href="#reviews">View all reviews</a>
+                        <a class="pull-right" href="#reviews">Ver avaliações</a>
                     </div>
                     <div class="datasheet p-3 mb-2 bg-info text-white">
-                        <a href="" class="text-white"><i class="fa fa-file-text"></i>Download DataSheet</a>
+                        <a href="" class="text-white"><i class="fa fa-file-text"></i> Baixar Prévia</a>
                     </div>
                 </div>
             </div>
@@ -121,7 +108,7 @@
         <div class="col-12">
             <div class="card border-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase">
-                    <i class="fa fa-align-justify"></i> Synopsis</div>
+                    <i class="fa fa-align-justify"></i> Sinopse</div>
                 <div class="card-body">
                     <p class="card-text">
                     {% if book.synopsis %} 
@@ -136,10 +123,10 @@
         <div class="col-12">
             <div class="card border-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase">
-                    <i class="fa fa-align-justify"></i> Book information</div>
+                    <i class="fa fa-align-justify"></i> Ficha técnica</div>
                 <div class="card-body">
                     <p class="card-text">
-                        <strong>Authors:</strong> 
+                        <strong>Autores:</strong> 
                         {% for author in book.author.all %}
                             <p class="card-text">
                                 {% if author %} 
@@ -151,7 +138,7 @@
                         {% endfor %}
                     </p>
                     <p class="card-text">
-                        <strong>Num of pages:</strong> 
+                        <strong>Número de paginas:</strong> 
                         {% if book.num_of_pages %} 
                             {{book.num_of_pages}} 
                         {% else %} 
@@ -159,7 +146,7 @@
                         {% endif%}
                     </p>
                     <p class="card-text">
-                        <strong>Publishing company:</strong> 
+                        <strong>Editora:</strong> 
                         {% if book.publishing_company %}
                             {{book.publishing_company}}
                         {% else %}
@@ -167,7 +154,7 @@
                         {% endif %}
                     </p>
                     <p class="card-text">
-                        <strong>Language:</strong>
+                        <strong>Idioma:</strong>
                         {% if book.language %}
                             {{book.language}}
                         {% else %}
@@ -183,7 +170,7 @@
                         {% endif %}
                     </p>
                     <p class="card-text">
-                        <strong>Dimensions of the book:</strong> 
+                        <strong>Dimensões:</strong> 
                         {% if book.dimensions_of_the_book %}
                             {{book.dimensions_of_the_book}}
                         {% else %}
@@ -195,7 +182,7 @@
         </div>
         <div class="col-12" id="reviews">
             <div class="card border-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-comment"></i> Reviews</div>
+                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-comment"></i> Avaliações</div>
                 <div class="card-body">
                 {% if book_review %}
                 {% for breview in book_review%}
@@ -224,7 +211,7 @@
                             <span class="fa fa-star"></span>
                         {% else %}
                         {% endif %}
-                        by <strong>
+                        por <strong>
                         {% if breview.user.first_name %} 
                             {{breview.user.first_name}}
                         {% else %}
@@ -244,7 +231,7 @@
                     </div>
                 {% endfor %}
                 {% else %}
-                    Not foun review
+                    Nenhuma avaliação
                 {% endif %}
                 </div>
             </div>

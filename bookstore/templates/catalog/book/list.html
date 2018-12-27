@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% block title %} {{ block.super }} - Livros {% endblock %}
 {% block content %}
 {% include "partials/nav.html" %}
 
@@ -8,12 +9,12 @@
         <div class="col-sm">
             <div class="card">
                 <div class="card-header bg-primary text-white text-uppercase">
-                    <i class=""></i> Book list
+                    <i class=""></i> Livros
                 </div>
                 <div class="card-body">
                     <div class="row">
                     {% for book in books %}
-                        <div class="col-sm">
+                        <div class="col-sm-4">
                             <div class="card">
                                 <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
                                 <div class="card-body">
@@ -53,38 +54,8 @@
                     {% endfor %}
                     </div>
                 </div> 
-                <div class="col-md-2 col-md-offset-12">
-                    <nav aria-label="Page navigation example">
-                    {% if is_paginated %}
-                        <ul class="pagination">
-                            {% if page_obj.has_previous %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
-                                </li>
-                            {% else %}
-                                <li class="page-link" class="disabled"><span>&laquo;</span></li>
-                            {% endif %}
-                            {% for i in paginator.page_range %}
-                                {% if page_obj.number == i %}
-                                    <li class="page-link" class="active">
-                                        <span>{{ i }} <span class="sr-only">(current)</span></span>
-                                    </li>
-                                {% else %}
-                                    <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                                {% endif %}
-                            {% endfor %}
-                            {% if page_obj.has_next %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
-                                </li>
-                            {% else %}
-                                <li class="page-link" class="disabled"><span>&raquo;</span></li>
-                            {% endif %}
-                        </ul>
-                    {% endif %}
-                    </nav>
-                </div>
-            </div>
+                {% include "partials/pagination.html" %}
+            </div><br>
         </div>
     </div>
 </div>
