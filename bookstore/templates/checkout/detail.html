@@ -33,7 +33,7 @@
                         </td>
                         <td data-th="Price">{{ item.price }}</td>
                         <td data-th="Quantity">
-                            <form  action="{% url 'cart_add' product.id %}" method="post">
+                            <form  action="{% url 'checkout:cart_add' product.id %}" method="post">
                                 <div class="row">
                                     <div class="col">
                                         {{ item.update_quantity_form.quantity }}
@@ -58,7 +58,7 @@
             <tfoot>
                 <tr>
                     <td>
-                        <a href="{% url 'book-list' %}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Comprando</a>
+                        <a href="{% url 'catalog:book-list' %}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Comprando</a>
                     </td>
                     <td colspan="2" class="hidden-xs"></td>
                     <td class="hidden-xs text-center">

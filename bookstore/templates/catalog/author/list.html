@@ -12,7 +12,7 @@
                 <div class="list-group">
                 {% for author in authors %}
                     <div class="list-group-item">
-                        <a href="{% url 'author-detail' slug=author.slug %}">
+                        <a href="{% url 'catalog:author-detail' slug=author.slug %}">
                             {% if author.name %} 
                                 {{author.name}} 
                             {% else %} 

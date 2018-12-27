@@ -11,13 +11,13 @@
                 <div class="card-header">Configurações</div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        <a href="{% url 'account:customer-account' %}">
+                        <a href="{% url 'accounts:detail' %}">
                             <li class="list-group-item">Painel inicial</li>
                         </a>
-                        <a href="{% url 'account:customer-account-edit' token=user.token %}">
+                        <a href="{% url 'accounts:edit' token=user.token %}">
                             <li class="list-group-item">Editar conta</li>
                         </a>
-                        <a href="{% url 'account:list-address' %}">
+                        <a href="{% url 'accounts:list-address' %}">
                             <li class="list-group-item">Livro de endereços</li>
                         </a>
                         <a href=""><li class="list-group-item">Meu pedidos</li></a>

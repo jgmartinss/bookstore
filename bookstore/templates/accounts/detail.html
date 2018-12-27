@@ -32,7 +32,7 @@
                         </p>
                         <p class="card-text">
                             <i>Email: </i>{{user.email}}
-                            <a href="{% url 'account:customer-account-edit' token=user.token %}">
+                            <a href="{% url 'accounts:edit' token=user.token %}">
                                 <i> Change account</i>
                             </a>
                         </p>

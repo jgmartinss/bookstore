@@ -30,7 +30,7 @@
                 {% for book in books %}
                     <div class="review">
                         <p class="blockquote">
-                            <a href="{% url 'book-detail' slug=book.slug %}" class="mb-0">
+                            <a href="{% url 'catalog:book-detail' slug=book.slug %}" class="mb-0">
                                 {% if book.title and book.publishing_company %} 
                                     {{book.title}} - ({{book.publishing_company}})
                                 {% else %}

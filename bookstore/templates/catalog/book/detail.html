@@ -36,7 +36,7 @@
                     {% else %}
                         <p class="price">${{book.price}}</p>
                     {% endif %}
-                    <form action="{% url 'cart_add' product_id=book.id %}" method="post">
+                    <form action="{% url 'checkout:cart_add' product_id=book.id %}" method="post">
                         <div class="form-group">
                             <label>Quantidade:</label>
                             <div class="input-group mb-3">

@@ -21,16 +21,16 @@ from . import forms
 from . import models
 
 
-class SignUpView(generic.CreateView):
+class RegisterView(generic.CreateView):
     model = models.User
     form_class = forms.RegisterUserForm
-    template_name = 'accounts/sign_up.html'
-    success_url = reverse_lazy('base:index')
+    template_name = 'accounts/register.html'
+    success_url = reverse_lazy('base:index') 
 
 
-class SignInView(generic.FormView):
+class LoginView(generic.FormView):
     form_class = forms.LoginUserForm
-    template_name = 'accounts/sign_in.html'
+    template_name = 'accounts/login.html'
     redirect_field_name = REDIRECT_FIELD_NAME
     success_url = reverse_lazy('base:index')
 
@@ -39,14 +39,14 @@ class SignInView(generic.FormView):
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
         request.session.set_test_cookie()
-        return super(SignInView, self).dispatch(request, *args, **kwargs)
+        return super(LoginView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         auth_login(self.request, form.get_user())
 
         if self.request.session.test_cookie_worked():
             self.request.session.delete_test_cookie()
-        return super(SignInView, self).form_valid(form)
+        return super(LoginView, self).form_valid(form)
 
     def get_success_url(self):
         redirect_to = self.request.GET.get(self.redirect_field_name)
@@ -88,7 +88,7 @@ class AddressCreateView(LoginRequiredMixin, generic.CreateView):
     model = models.Address
     form_class = forms.AddressForm
     template_name = 'accounts/new-address.html'
-    success_url = reverse_lazy('account:list-address')
+    success_url = reverse_lazy('accounts:list-address')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -109,7 +109,7 @@ class AccountUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = models.User
     form_class = forms.AccountForm
     template_name = 'accounts/edit-account.html'
-    success_url = reverse_lazy('account:customer-account')
+    success_url = reverse_lazy('accounts:datail')
 
     def get_object(self):
         _token = self.kwargs.get("token")

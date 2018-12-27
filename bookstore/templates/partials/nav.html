@@ -11,33 +11,33 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
             {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'author-list' %}">Autores</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'book-list' %}">Livros</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'publishing-list' %}">Editoras</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'catalog:author-list' %}">Autores</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'catalog:book-list' %}">Livros</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'catalog:publishing-list' %}">Editoras</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" 
                        href="#" id="dropdown01" data-toggle="dropdown" 
                        aria-haspopup="true" aria-expanded="false">{{user.email}}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="{% url 'account:customer-account' %}">Minha conta</a>
-                        <a class="dropdown-item" href="{% url 'account:logout' %}">Sair</a>
+                        <a class="dropdown-item" href="{% url 'accounts:detail' %}">Minha conta</a>
+                        <a class="dropdown-item" href="{% url 'accounts:logout' %}">Sair</a>
                     </div>
                 </li>
             {% else %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'account:sign-in' %}">Entrar<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'accounts:login' %}">Entrar<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'account:sign-up' %}">Cadastrar<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'accounts:register' %}">Cadastrar<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'author-list' %}">Autores</a>
+                    <a class="nav-link" href="{% url 'catalog:author-list' %}">Autores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'book-list' %}">Livros</a>
+                    <a class="nav-link" href="{% url 'catalog:book-list' %}">Livros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'publishing-list' %}">Editoras</a>
+                    <a class="nav-link" href="{% url 'catalog:publishing-list' %}">Editoras</a>
                 </li>
             {% endif %}
             </ul>
