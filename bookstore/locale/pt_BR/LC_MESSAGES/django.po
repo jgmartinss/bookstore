@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-26 13:08-0200\n"
+"POT-Creation-Date: 2018-12-26 21:36-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: bookstore/apps/accounts/apps.py:8
+msgid "Accounts"
+msgstr "Contas"
+
 #: bookstore/apps/accounts/choices.py:8
 msgid "Male"
 msgstr "Masculino"
@@ -31,7 +35,7 @@ msgstr "senha"
 
 #: bookstore/apps/accounts/forms.py:45
 msgid "password confirmation"
-msgstr "confirmar senha"
+msgstr "confirmação de senha"
 
 #: bookstore/apps/accounts/forms.py:74
 msgid "email"
@@ -83,7 +87,24 @@ msgstr "Gênero"
 
 #: bookstore/apps/accounts/models.py:43
 msgid "Birthday"
-msgstr "Data de nascimento"
+msgstr "Data nascimento "
+
+#: bookstore/apps/accounts/models.py:44
+msgid "Token"
+msgstr "Token"
+
+#: bookstore/apps/accounts/models.py:45
+#: bookstore/apps/catalog/abstract_models.py:13
+msgid "Is active?"
+msgstr "Está ativo?"
+
+#: bookstore/apps/accounts/models.py:46
+msgid "Is staff?"
+msgstr "É funcionario"
+
+#: bookstore/apps/accounts/models.py:47
+msgid "Is admin?"
+msgstr "É admin"
 
 #: bookstore/apps/accounts/models.py:55 bookstore/apps/accounts/models.py:87
 #: bookstore/apps/accounts/models.py:118 bookstore/apps/accounts/models.py:141
@@ -113,7 +134,7 @@ msgstr "Estado"
 
 #: bookstore/apps/accounts/models.py:95
 msgid "Country"
-msgstr "País"
+msgstr "Páis"
 
 #: bookstore/apps/accounts/models.py:96
 msgid "Post code"
@@ -140,10 +161,6 @@ msgstr "Endereço de cobrança"
 msgid "Billing Addresss"
 msgstr "Endereço de cobrança"
 
-#: bookstore/apps/catalog/abstract_models.py:13
-msgid "Is active?"
-msgstr "Está ativo?"
-
 #: bookstore/apps/catalog/abstract_models.py:17
 msgid "Is featured?"
 msgstr "Está em destaque?"
@@ -152,61 +169,73 @@ msgstr "Está em destaque?"
 msgid "Visible where?"
 msgstr "Visível onde?"
 
-#: bookstore/apps/catalog/abstract_models.py:28
+#: bookstore/apps/catalog/abstract_models.py:25
+msgid "Price"
+msgstr "Preço"
+
+#: bookstore/apps/catalog/abstract_models.py:30
+msgid "Cost price"
+msgstr "Preço de custo"
+
+#: bookstore/apps/catalog/abstract_models.py:35
+msgid "Special price"
+msgstr "Preço especial"
+
+#: bookstore/apps/catalog/abstract_models.py:40
 msgid "Special price from date"
 msgstr "Preço especial a partir de"
 
-#: bookstore/apps/catalog/abstract_models.py:33
+#: bookstore/apps/catalog/abstract_models.py:45
 msgid "Special price to date"
-msgstr "Preço especial até hoje"
+msgstr "Preço especial até"
 
-#: bookstore/apps/catalog/abstract_models.py:38
+#: bookstore/apps/catalog/abstract_models.py:50
 msgid "Show real price"
 msgstr "Mostrar preço real"
 
-#: bookstore/apps/catalog/abstract_models.py:42
+#: bookstore/apps/catalog/abstract_models.py:54
 msgid "Availability of stock"
 msgstr "Disponibilidade de estoque"
 
-#: bookstore/apps/catalog/abstract_models.py:46
+#: bookstore/apps/catalog/abstract_models.py:58
 msgid "Quantity"
 msgstr "Quantidade"
 
-#: bookstore/apps/catalog/abstract_models.py:50
+#: bookstore/apps/catalog/abstract_models.py:62
 msgid "Inventory maintenance unit"
 msgstr "Unidade de manutenção de estoque"
 
-#: bookstore/apps/catalog/abstract_models.py:54
+#: bookstore/apps/catalog/abstract_models.py:66
 msgid "Quantity for item status switch to out of stock"
 msgstr "Qtd para status de item mudar para fora de estoque"
 
-#: bookstore/apps/catalog/abstract_models.py:58
+#: bookstore/apps/catalog/abstract_models.py:70
 msgid "MAX/Quantity in the shopping cart"
 msgstr "MAX/Qtd no carrinho de compras"
 
-#: bookstore/apps/catalog/abstract_models.py:62
+#: bookstore/apps/catalog/abstract_models.py:74
 msgid "Notify when stock is exhausted?"
 msgstr "Notificar quando o estoque estiver esgotado?"
 
-#: bookstore/apps/catalog/abstract_models.py:66
+#: bookstore/apps/catalog/abstract_models.py:78
 msgid "Weight"
 msgstr "Peso"
 
-#: bookstore/apps/catalog/abstract_models.py:71
+#: bookstore/apps/catalog/abstract_models.py:83
 msgid "Length"
 msgstr "Comprimento"
 
-#: bookstore/apps/catalog/abstract_models.py:72
-#: bookstore/apps/catalog/abstract_models.py:76
-#: bookstore/apps/catalog/abstract_models.py:80
+#: bookstore/apps/catalog/abstract_models.py:84
+#: bookstore/apps/catalog/abstract_models.py:88
+#: bookstore/apps/catalog/abstract_models.py:92
 msgid "Measured in centimeters."
 msgstr "Medido em centímetros."
 
-#: bookstore/apps/catalog/abstract_models.py:75
+#: bookstore/apps/catalog/abstract_models.py:87
 msgid "Height"
 msgstr "Altura"
 
-#: bookstore/apps/catalog/abstract_models.py:79
+#: bookstore/apps/catalog/abstract_models.py:91
 msgid "Width"
 msgstr "Largura"
 
@@ -218,7 +247,7 @@ msgstr "Autores"
 msgid "Categories"
 msgstr "Categorias"
 
-#: bookstore/apps/catalog/choices.py:9
+#: bookstore/apps/catalog/apps.py:8 bookstore/apps/catalog/choices.py:9
 msgid "Catalog"
 msgstr "Catálogo"
 
@@ -236,11 +265,11 @@ msgstr "No carrinho"
 
 #: bookstore/apps/catalog/choices.py:21
 msgid "Before confirming order"
-msgstr "Antes de confirmar a ordem"
+msgstr ""
 
 #: bookstore/apps/catalog/choices.py:28
 msgid "Out of stock"
-msgstr "Fora de estoque"
+msgstr "Antes de confirmar a ordem"
 
 #: bookstore/apps/catalog/choices.py:29
 msgid "In stock"
@@ -248,23 +277,23 @@ msgstr "Em estoque"
 
 #: bookstore/apps/catalog/choices.py:39
 msgid "1 Star"
-msgstr "1 Estrela"
+msgstr "1 estrela"
 
 #: bookstore/apps/catalog/choices.py:40
 msgid "2 Star"
-msgstr "2 Estrelas"
+msgstr "2 estrelas"
 
 #: bookstore/apps/catalog/choices.py:41
 msgid "3 Star"
-msgstr "4 Estrelas"
+msgstr "3 estrelas"
 
 #: bookstore/apps/catalog/choices.py:42
 msgid "4 Star"
-msgstr "4 Estrelas"
+msgstr "4 estrelas"
 
 #: bookstore/apps/catalog/choices.py:43
 msgid "5 Star"
-msgstr "5 Estrelas"
+msgstr "5 estrelas"
 
 #: bookstore/apps/catalog/choices.py:47
 msgid "Bulgarian"
@@ -278,7 +307,7 @@ msgstr ""
 msgid "German"
 msgstr ""
 
-#: bookstore/apps/catalog/choices.py:50
+#: bookstore/apps/catalog/choices.py:50 bookstore/settings/base.py:99
 msgid "English"
 msgstr ""
 
@@ -322,9 +351,9 @@ msgstr ""
 msgid "Polish"
 msgstr ""
 
-#: bookstore/apps/catalog/choices.py:61
+#: bookstore/apps/catalog/choices.py:61 bookstore/settings/base.py:100
 msgid "Portuguese (Brazil)"
-msgstr ""
+msgstr "Português (Brasil)"
 
 #: bookstore/apps/catalog/choices.py:62
 msgid "Romanian"
@@ -386,7 +415,7 @@ msgstr "Autor"
 
 #: bookstore/apps/catalog/models.py:43
 msgid "Authors"
-msgstr "Autors"
+msgstr "Autores"
 
 #: bookstore/apps/catalog/models.py:61
 msgid "Sub category"
@@ -402,7 +431,7 @@ msgstr "Título"
 
 #: bookstore/apps/catalog/models.py:97
 msgid "Original Title"
-msgstr "Título Original"
+msgstr "Título original"
 
 #: bookstore/apps/catalog/models.py:115
 msgid "ISBN"
@@ -414,7 +443,7 @@ msgstr "Sinopse"
 
 #: bookstore/apps/catalog/models.py:118
 msgid "Number of pages"
-msgstr "Número de páginas"
+msgstr "Número de paginas"
 
 #: bookstore/apps/catalog/models.py:121
 msgid "Hardback?"
@@ -439,15 +468,15 @@ msgstr "Imagem"
 
 #: bookstore/apps/catalog/models.py:173
 msgid "Book Image"
-msgstr "Imagem do Livro"
+msgstr "Imagem do livro"
 
 #: bookstore/apps/catalog/models.py:174
 msgid "Book Images"
-msgstr "Imagens dos Livros"
+msgstr "Imagens do livro"
 
 #: bookstore/apps/catalog/models.py:191
 msgid "Comment"
-msgstr "Comentários"
+msgstr "Comentário"
 
 #: bookstore/apps/catalog/models.py:199
 msgid "Stars"
@@ -459,11 +488,15 @@ msgstr "Revisão do livro"
 
 #: bookstore/apps/catalog/models.py:207
 msgid "Book Reviews"
-msgstr "Revisão dos livros"
+msgstr "Revisão do livro"
+
+#: bookstore/apps/coupons/apps.py:8 bookstore/apps/coupons/models.py:26
+msgid "Coupons"
+msgstr "Cupons"
 
 #: bookstore/apps/coupons/forms.py:7 bookstore/apps/coupons/models.py:25
 msgid "Coupon"
-msgstr "Coupon"
+msgstr "Cupon"
 
 #: bookstore/apps/coupons/models.py:11
 msgid "Code"
@@ -485,9 +518,9 @@ msgstr "Desconto"
 msgid "Is Active?"
 msgstr "Está ativo?"
 
-#: bookstore/apps/coupons/models.py:26
-msgid "Coupons"
-msgstr "Coupons"
+#: bookstore/apps/newsletter/apps.py:8
+msgid "Newsletter"
+msgstr "Boletim de Notícias"
 
 #: bookstore/apps/newsletter/models.py:10
 msgid "Full name"
@@ -501,13 +534,13 @@ msgstr "Inscrito"
 msgid "Subscribes"
 msgstr "Inscritos"
 
+#: bookstore/apps/orders/apps.py:8 bookstore/apps/orders/models.py:32
+msgid "Orders"
+msgstr "Pedidos"
+
 #: bookstore/apps/orders/models.py:31
 msgid "Order"
 msgstr "Pedido"
-
-#: bookstore/apps/orders/models.py:32
-msgid "Orders"
-msgstr "Pedidos"
 
 #: bookstore/apps/orders/models.py:55
 msgid "Order item"
@@ -516,3 +549,7 @@ msgstr "Item pedido"
 #: bookstore/apps/orders/models.py:56
 msgid "Order items"
 msgstr "Itens pedidos"
+
+#: bookstore/apps/summarys/apps.py:8
+msgid "Summarys"
+msgstr "Resumos"

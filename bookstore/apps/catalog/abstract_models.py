@@ -21,9 +21,21 @@ class Product(TimeStampedModel):
         _('Visible where?'),
         choices=choices.VISIBLE_WHERE
     )
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    cost_price = models.DecimalField(max_digits=10, decimal_places=2)
-    special_price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(
+        _('Price'), 
+        max_digits=10, 
+        decimal_places=2
+    )
+    cost_price = models.DecimalField(
+        _('Cost price'), 
+        max_digits=10, 
+        decimal_places=2
+    )
+    special_price = models.DecimalField(
+        _('Special price'), 
+        max_digits=10, 
+        decimal_places=2
+    )
     special_price_from_date = models.DateField(
         _('Special price from date'),
         blank=True,

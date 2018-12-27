@@ -41,10 +41,10 @@ class User(AbstractBaseUser,  PermissionsMixin, TimeStampedModel):
         null=True
     )
     birthday = models.DateField(_('Birthday'), blank=True, null=True)
-    token = models.UUIDField(blank=True, editable=False, unique=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_admin = models.BooleanField(default=False)
+    token = models.UUIDField(_('Token'), blank=True, editable=False, unique=True)
+    is_active = models.BooleanField(_('Is active?'), default=True)
+    is_staff = models.BooleanField(_('Is staff?'), default=False)
+    is_admin = models.BooleanField(_('Is admin?'), default=False)
 
     objects = managers.UserManager()
 
