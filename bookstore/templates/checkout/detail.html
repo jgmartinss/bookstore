@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-th="Price">{{ item.price }}</td>
+                        <td data-th="Price">${{ item.price }}</td>
                         <td data-th="Quantity">
                             <form  action="{% url 'checkout:cart_add' product.id %}" method="post">
                                 <div class="row">
@@ -43,7 +43,16 @@
                                         <button class="btn btn-info btn-sm" style="margin-top:4px;" type="submit">
                                             <i class="fa fa-refresh"></i>
                                         </button>
-                                        <button class="btn btn-danger btn-sm" style="margin-top:4px;">
+                                    </div>
+                                </div>
+                                {% csrf_token %}
+                            </form>
+                        </td>
+                        <td>
+                            <form  action="{% url 'checkout:cart_remove' product.id %}" method="post">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-danger btn-sm" style="margin-left:30px;" type="submit">
                                             <i class="fa fa-trash-o"></i>
                                         </button>
                                     </div>
@@ -58,14 +67,18 @@
             <tfoot>
                 <tr>
                     <td>
-                        <a href="{% url 'catalog:book-list' %}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Comprando</a>
+                        <a href="{% url 'catalog:book-list' %}" class="btn btn-warning">
+                            <i class="fa fa-angle-left"></i> Continue Comprando
+                        </a>
                     </td>
                     <td colspan="2" class="hidden-xs"></td>
                     <td class="hidden-xs text-center">
-                        <strong>{{ cart.get_total_price }}</strong>
+                        <strong>${{ cart.get_total_price }}</strong>
                     </td>
                     <td>
-                        <a href="#" class="btn btn-success btn-block"> Checkout <i class="fa fa-angle-right"></i></a>
+                        <a href="#" class="btn btn-success btn-block"> 
+                            Checkout <i class="fa fa-angle-right"></i>
+                        </a>
                     </td>
                 </tr>
             </tfoot>
