@@ -38,6 +38,7 @@ LOCAL_APPS = [
     'bookstore.apps.newsletter',
     'bookstore.apps.coupons',
     'bookstore.apps.checkout',
+    'bookstore.apps.orders',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -101,6 +102,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LOGIN_URL='/account/login/'
+
+LOGIN_REDIRECT_URL='/account/login/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

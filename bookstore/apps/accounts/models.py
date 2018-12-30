@@ -92,67 +92,24 @@ class Address(TimeStampedModel):
     street_2 = models.CharField(_('Street 2'), max_length=145)
     city = models.CharField(_('City'), max_length=100)
     state = models.CharField(_('State'), max_length=20)
-    country = CountryField(_('Country'), blank_label='(select country)')
+    country = CountryField(_('Country'), blank_label=_('(Select country)'))
     postal_code = models.CharField(_('Post code'), max_length=20)
+    is_billing_address = models.BooleanField(_('Is billing address?'))
 
     class Meta:
+        app_label = 'accounts'
         verbose_name = _('Address')
         verbose_name_plural = _('Address')
         db_table = 'tb_accounts_address'
 
     @property
     def streets_in_line(self):
-        return f'{self.street_1} {self.street_1}'
+        return f'{self.street_1}, {self.street_2}'
 
     @property
     def region_in_line(self):
-        return f'{self.city}/{self.state}/{self.country}'
+        return f'{self.city}-{self.state}/{self.country}'
 
     def __str__(self):
-        return f"{self.user.get_full_name} - ({self.postal_code}/{self.street_1}, {self.street_2})"
-
-
-class DefaultShippingAddress(TimeStampedModel):
-    user = models.OneToOneField(
-        'accounts.User',
-        verbose_name=_('User'),
-        related_name='user_shipping_address',
-        on_delete=models.CASCADE
-    )
-    address = models.OneToOneField(
-        'accounts.Address',
-        verbose_name=_('Address'),
-        related_name='default_shipping_address',
-        on_delete=models.CASCADE
-    )
-
-    class Meta:
-        verbose_name = _("Shipping Address")
-        verbose_name_plural = _("Shipping Addresss")
-        db_table = 'tb_accounts_default_shipping_address'
-
-    def __str__(self):
-        pass
-
-
-class DefaultBillingAddress(TimeStampedModel):
-    user = models.OneToOneField(
-        'accounts.User',
-        verbose_name=_('User'),
-        related_name='user_billing_address',
-        on_delete=models.CASCADE
-    )
-    address = models.OneToOneField(
-        'accounts.Address',
-        verbose_name=_('Address'),
-        related_name='default_billing_address',
-        on_delete=models.CASCADE
-    )
-
-    class Meta:
-        verbose_name = _("Billing Address")
-        verbose_name_plural = _("Billing Addresss")
-        db_table = 'tb_accounts_default_billing_address'
-
-    def __str__(self):
-        pass
+        return f"{self.postal_code}/{self.streets_in_line} - {self.region_in_line}"
+        
