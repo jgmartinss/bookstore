@@ -8,6 +8,8 @@ from bookstore.apps.accounts.models import User
 from bookstore.apps.orders.models import OrderItem
 from bookstore.apps.orders.forms import OrderForm 
 
+from decimal import Decimal
+
 
 @login_required
 def create_order(request):
@@ -20,9 +22,10 @@ def create_order(request):
 			order.user = request.user
 			order.save()
 			for item in cart:
+				real_price = Decimal(item['price']) * int(item['quantity'])
 				OrderItem.objects.create(
 					order=order, product=item['product'], 
-					price=item['price'], quantity=item['quantity']
+					price=real_price, quantity=item['quantity']
 				)
 			cart.clear()
 			request.session['order_id'] = order.id

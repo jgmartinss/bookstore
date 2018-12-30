@@ -7,7 +7,7 @@ class OrderItemAdmin(admin.ModelAdmin):
     model = models.OrderItem
     ordering = ('-created',)
     search_fields = ('order__user__email', 'product__title',)
-    list_display = ('order', 'price', 'quantity', 'created')
+    list_display = ('order', 'product', 'quantity', 'price', 'created')
     list_display_links = ['order']
     date_hierarchy = 'created'
 

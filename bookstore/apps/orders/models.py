@@ -40,7 +40,7 @@ class Order(TimeStampedModel):
         db_table = 'tb_orders_order'
 
     def __str__(self):
-        return f"Order {self.id} - {self.user.email}"
+        return f"{self.id}"
 
 
 class OrderItem(TimeStampedModel):

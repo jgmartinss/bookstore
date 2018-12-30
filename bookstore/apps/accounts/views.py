@@ -109,7 +109,7 @@ class AccountUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = models.User
     form_class = forms.AccountForm
     template_name = 'accounts/edit-account.html'
-    success_url = reverse_lazy('accounts:datail')
+    success_url = reverse_lazy('accounts:detail')
 
     def get_object(self):
         _token = self.kwargs.get("token")
