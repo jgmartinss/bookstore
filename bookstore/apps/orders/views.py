@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from bookstore.apps.checkout.cart import Cart
 
 from bookstore.apps.accounts.models import User
-from bookstore.apps.orders.models import OrderItem
+from bookstore.apps.orders.models import OrderItem, Order
 from bookstore.apps.orders.forms import OrderForm 
 
 from decimal import Decimal

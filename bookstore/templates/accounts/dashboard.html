@@ -22,10 +22,11 @@
                         </a>
                         <a href=""><li class="list-group-item">Meu pedidos</li></a>
                         <a href=""><li class="list-group-item">Minhas avaliações</li></a>
-                        <a href=""><li class="list-group-item">Assinar Boletim</li></a>
+                        <a href="{% url 'newsletter:new-newsletter' %}"><li class="list-group-item">Assinar newsletter</li></a>
                     </ul>
                 </div> 
             </div>
+            <br/>
         </div>
         {% block dashboard %}
         {% endblock %}

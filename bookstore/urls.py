@@ -6,8 +6,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from django.views import generic
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,6 +13,7 @@ urlpatterns = [
     path('account/', include('bookstore.apps.accounts.urls')),
     path('catalog/', include('bookstore.apps.catalog.urls')),
     path('checkout/', include('bookstore.apps.checkout.urls')),
+    path('newsletter/', include('bookstore.apps.newsletter.urls')),
     path('trumbowyg/', include('trumbowyg.urls')),
 ]
 

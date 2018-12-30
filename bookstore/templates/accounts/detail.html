@@ -11,7 +11,7 @@
                 {% if user_information %}
                     {% for user in user_information %}
                         <p class="card-text">
-                            <strong>Olá, {{user.first_name}} {{user.last_name}}!</strong>
+                            <strong>Olá, {{user.first_name}}!</strong>
                         </p>
                         <p>No Painel de Configurações, você tem a capacidade de atualizar as informações da sua conta. Selecione um link abaixo para visualizar ou editar informações.</p>
                     {% endfor %}
@@ -26,15 +26,14 @@
                 {% if user_information %}
                     {% for user in user_information %}
                         <p class="card-text">
-                            <i>Telefone:</i> {{user.phone_number}} - 
-                            <i>CPF:</i> {{user.tax_vat_number}} - 
-                            <i>Empresa:</i> {{user.company}}
+                            <i>Nome completo:</i> {{user.first_name}} {{user.last_name}} / 
+                            <i>CPF:</i> {{user.tax_vat_number}} / 
+                            <i>Telefone:</i> {{user.phone_number}} / 
                         </p>
                         <p class="card-text">
-                            <i>Email: </i>{{user.email}}
-                            <a href="{% url 'accounts:edit' token=user.token %}">
-                                <i> Change account</i>
-                            </a>
+                            <i>Email: </i>{{user.email}} /
+                            <i>Empresa:</i> {{user.company}}
+                            <a href="{% url 'accounts:edit' token=user.token %}"><i> Editar</i></a>
                         </p>
                     {% endfor %}
                 {% else %}
@@ -44,16 +43,30 @@
         </div>
         <div class="card w-85">
             <div class="card-body">
-                <h5 class="card-title">Default Shipping Address</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Button</a>
+                <h5 class="card-title">Endereço de entrega</h5>
+                {% if shipping_address_information %}
+                    {% for s in shipping_address_information %}
+                        <p class="card-text">
+                            {{s.streets_in_line}}/ {{s.postal_code}} - {{s.region_in_line}}
+                            <a href="{% url 'accounts:new-address' %}"><i> Novo</i></a>
+                        </p>
+                    {% endfor %}
+                {% else %}
+                {% endif %}
             </div>
         </div>
         <div class="card w-85">
             <div class="card-body">
-                <h5 class="card-title">Default Billing Address</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Button</a>
+                <h5 class="card-title">Endereço de cobrança</h5>
+                {% if shipping_address_information %}
+                    {% for b in billing_address_information %}
+                        <p class="card-text">
+                            {{b.streets_in_line}}/ {{b.postal_code}} - {{b.region_in_line}}
+                            <a href="{% url 'accounts:new-address' %}"><i> Novo</i></a>
+                        </p>
+                    {% endfor %}
+                {% else %}
+                {% endif %}
             </div>
         </div>
     </div><br/>

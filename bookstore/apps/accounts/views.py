@@ -69,18 +69,18 @@ class AccountView(LoginRequiredMixin, generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super(AccountView, self).get_context_data(**kwargs)
         context['user_information'] = self.get_user_information
-        # context['shipping_address_information'] = self.get_shipping_address_information
-        # context['billing_address_information'] = self.get_billing_address_information
+        context['shipping_address_information'] = self.get_shipping_address_information
+        context['billing_address_information'] = self.get_billing_address_information
         return context
 
     def get_user_information(self):
         return models.User.objects.filter(id=self.request.user.id)
 
-    # def get_shipping_address_information(self):
-    #     return models.DefaultShippingAddress.objects.filter(user__id=self.request.user.id)[:1]
+    def get_shipping_address_information(self):
+        return models.Address.objects.filter(user__id=self.request.user.id)[:1]
 
-    # def get_billing_address_information(self):
-    #     return models.DefaultBillingAddress.objects.filter(user__id=self.request.user.id)[:1]
+    def get_billing_address_information(self):
+        return models.Address.objects.filter(user__id=self.request.user.id, is_billing_address=1)[:1]
 
 
 
