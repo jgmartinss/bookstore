@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} {{ block.super }} - Compra finalizada {% endblock %}
+{% block content %}
+{% include "partials/nav.html" %}
+
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        <h3 class="alert-heading" align="center">Seu pedido foi recebido!</h3>
+        <h4 class="alert-heading" align="center">Obrigado pela sua compra!</h4><br/>
+        {% for o in order %}
+        <p align="center">Seu pedido nº é: <a href="">{{o.id}}</a>.
+            Você receberá um e-mail de confirmação do pedido com detalhes do seu pedido e um link para acompanhar seu progresso.
+        </p>
+        {% endfor %}
+        <p align="center">Clique <a href="">aqui</a> para imprimir uma cópia da confirmação do seu pedido.</p>
+        <div class="col text-center">
+            <a href="{% url 'catalog:book-list' %}" type="button" class="btn btn-primary">Continue comprando</a>
+        </div>
+    </div>
+</div><br/>
+
+{% include "partials/footer.html" %}
+{% endblock content %}

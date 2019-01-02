@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.views import generic
 
 from bookstore.apps.checkout.cart import Cart
 
@@ -29,7 +32,7 @@ def create_order(request):
 				)
 			cart.clear()
 			request.session['order_id'] = order.id
-			return redirect('/')
+			return redirect('checkout:cart_onepage_success')
 	else:
 		form = OrderForm(request.user)
 		user = User.objects.filter(id=request.user.id)
@@ -38,3 +41,15 @@ def create_order(request):
     	'checkout/onepage.html', 
     	{'form': form, 'user': user, 'cart': cart}
     )
+
+
+class OrderSuccessView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'checkout/success.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderSuccessView, self).get_context_data(**kwargs)
+        context['order'] = self.get_order_number
+        return context
+
+    def get_order_number(self):
+    	return Order.objects.filter(user__id=self.request.user.id).order_by('-id')[:1][::-1]

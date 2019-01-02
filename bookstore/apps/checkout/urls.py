@@ -14,5 +14,5 @@ urlpatterns = [
     path('add/<int:product_id>/', views.cart_add, name='cart_add'),
     path('remove/<int:product_id>/', views.cart_remove, name='cart_remove'),
     path('onepage/', order_view.create_order, name='cart_onepage'),
-    #path('onepage/success/', views.new_product, name='cart_onepage_success'),
+    path('onepage/success/', order_view.OrderSuccessView.as_view(), name='cart_onepage_success'),
 ]
