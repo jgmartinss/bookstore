@@ -8,13 +8,10 @@ class UserManager(BaseUserManager):
     def create_user(self, email, password, **kwargs):
 
         email = self.normalize_email(email)
-        is_superuser = kwargs.pop('is_superuser', False)
+        is_superuser = kwargs.pop("is_superuser", False)
 
         user = self.model(
-            email=email,
-            is_active=True,
-            is_superuser=is_superuser,
-            **kwargs
+            email=email, is_active=True, is_superuser=is_superuser, **kwargs
         )
 
         user.set_password(password)
@@ -23,9 +20,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, **kwargs):
-        super_user = self.create_user(
-            email=email, password=password
-        )
+        super_user = self.create_user(email=email, password=password)
         super_user.is_admin = True
         super_user.is_superuser = True
         super_user.is_active = True

@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
     login as auth_login,
-    logout as auth_logout
+    logout as auth_logout,
 )
 
 from django.views import generic
@@ -24,17 +24,17 @@ from . import models
 class RegisterView(generic.CreateView):
     model = models.User
     form_class = forms.RegisterUserForm
-    template_name = 'accounts/register.html'
-    success_url = reverse_lazy('base:index') 
+    template_name = "accounts/register.html"
+    success_url = reverse_lazy("base:index")
 
 
 class LoginView(generic.FormView):
     form_class = forms.LoginUserForm
-    template_name = 'accounts/login.html'
+    template_name = "accounts/login.html"
     redirect_field_name = REDIRECT_FIELD_NAME
-    success_url = reverse_lazy('base:index')
+    success_url = reverse_lazy("base:index")
 
-    @method_decorator(sensitive_post_parameters('password'))
+    @method_decorator(sensitive_post_parameters("password"))
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
@@ -56,7 +56,7 @@ class LoginView(generic.FormView):
 
 
 class LogoutView(LoginRequiredMixin, generic.RedirectView):
-    url = '/'
+    url = "/"
 
     def get(self, request, *args, **kwargs):
         auth_logout(request)
@@ -64,13 +64,13 @@ class LogoutView(LoginRequiredMixin, generic.RedirectView):
 
 
 class AccountView(LoginRequiredMixin, generic.TemplateView):
-    template_name = 'accounts/detail.html'
+    template_name = "accounts/detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(AccountView, self).get_context_data(**kwargs)
-        context['user_information'] = self.get_user_information
-        context['shipping_address_information'] = self.get_shipping_address_information
-        context['billing_address_information'] = self.get_billing_address_information
+        context["user_information"] = self.get_user_information
+        context["shipping_address_information"] = self.get_shipping_address_information
+        context["billing_address_information"] = self.get_billing_address_information
         return context
 
     def get_user_information(self):
@@ -80,15 +80,16 @@ class AccountView(LoginRequiredMixin, generic.TemplateView):
         return models.Address.objects.filter(user__id=self.request.user.id)[:1]
 
     def get_billing_address_information(self):
-        return models.Address.objects.filter(user__id=self.request.user.id, is_billing_address=1)[:1]
-
+        return models.Address.objects.filter(
+            user__id=self.request.user.id, is_billing_address=1
+        )[:1]
 
 
 class AddressCreateView(LoginRequiredMixin, generic.CreateView):
     model = models.Address
     form_class = forms.AddressForm
-    template_name = 'accounts/new-address.html'
-    success_url = reverse_lazy('accounts:list-address')
+    template_name = "accounts/new-address.html"
+    success_url = reverse_lazy("accounts:list-address")
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -97,24 +98,20 @@ class AddressCreateView(LoginRequiredMixin, generic.CreateView):
 
 class AddressListView(LoginRequiredMixin, generic.ListView):
     model = models.Address
-    context_object_name = 'user_address'
-    template_name = 'accounts/list-address.html'
+    context_object_name = "user_address"
+    template_name = "accounts/list-address.html"
 
     def get_queryset(self, **kwargs):
         address = models.Address.objects.all()
-        return address.filter(user=self.request.user).order_by('-created')
+        return address.filter(user=self.request.user).order_by("-created")
 
 
 class AccountUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = models.User
     form_class = forms.AccountForm
-    template_name = 'accounts/edit-account.html'
-    success_url = reverse_lazy('accounts:detail')
+    template_name = "accounts/edit-account.html"
+    success_url = reverse_lazy("accounts:detail")
 
     def get_object(self):
         _token = self.kwargs.get("token")
         return get_object_or_404(models.User, token=_token)
-
-
-
-

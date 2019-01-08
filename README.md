@@ -1,5 +1,5 @@
 # Bookstore 
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/jgmartinss/bookstore/blob/master/LICENSE)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black) [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/jgmartinss/bookstore/blob/master/LICENSE)
 > Bookstore é um projeto para colocar em prática meus conhecimentos sobre Django. Buscando explorar todos os seus recursos. 
 
 ## Objetivo

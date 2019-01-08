@@ -19,6 +19,7 @@ class SubscribeFactory(DjangoModelFactory):
     class Meta:
         model = models.Subscribe
 
-    email = factory.LazyAttribute(lambda a: '{}@email.com'.format(a.full_name).lower().replace(' ', ''))
-    full_name = factory.Faker('name')
-
+    email = factory.LazyAttribute(
+        lambda a: "{}@email.com".format(a.full_name).lower().replace(" ", "")
+    )
+    full_name = factory.Faker("name")

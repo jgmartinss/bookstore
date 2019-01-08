@@ -8,10 +8,14 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
 
 
-app_name = 'newsletter'
+app_name = "newsletter"
 
 urlpatterns = [
-    path('new/', views.SubscribeCreateView.as_view(), name='new-newsletter'),
+	path(
+		"new/", 
+		views.SubscribeCreateView.as_view(), 
+		name="new-newsletter"
+	),
 ]
 urlpatterns += staticfiles_urlpatterns()
 

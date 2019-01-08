@@ -28,6 +28,7 @@ python-decouple = "*"
 django-extensions = "*"
 factory-boy = "*"
 faker = "*"
+black = "*"
 
 [requires]
 python_version = "3.6"

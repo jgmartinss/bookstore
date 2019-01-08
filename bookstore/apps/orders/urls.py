@@ -8,12 +8,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
 
 
-app_name = 'orders'
+app_name = "orders"
 
-urlpatterns = [
-    
-]
+urlpatterns = []
 urlpatterns += staticfiles_urlpatterns()
 
 if settings.DEBUG:
-	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

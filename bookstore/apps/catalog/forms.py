@@ -9,26 +9,22 @@ from . import models
 class AuthorForm(ModelForm):
     class Meta:
         model = models.Author
-        fields = '__all__'
-        widgets = {
-            'about_of': TrumbowygWidget(),
-        }
+        fields = "__all__"
+        widgets = {"about_of": TrumbowygWidget()}
 
 
 class BookForm(ModelForm):
     class Meta:
         model = models.Book
-        fields = '__all__'
-        widgets = {
-            'synopsis': TrumbowygWidget(),
-        }
+        fields = "__all__"
+        widgets = {"synopsis": TrumbowygWidget()}
 
 
 class BookImagesForm(ModelForm):
     class Meta:
         model = models.BookImages
-        fields = '__all__'
+        fields = "__all__"
         widgets = {
-            'list_page_cropping': ImageCropWidget(),
-            'detail_page_cropping': ImageCropWidget(),
+            "list_page_cropping": ImageCropWidget(),
+            "detail_page_cropping": ImageCropWidget(),
         }

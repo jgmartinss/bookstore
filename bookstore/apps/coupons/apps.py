@@ -4,5 +4,5 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CouponsConfig(AppConfig):
-    name = 'coupons'
-    verbose_name = _('Coupons')
+    name = "coupons"
+    verbose_name = _("Coupons")
