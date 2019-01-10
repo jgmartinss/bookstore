@@ -10,7 +10,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 from django_countries.fields import CountryField
 from model_utils.models import TimeStampedModel
-from phonenumber_field.modelfields import PhoneNumber, PhoneNumberField
 
 from . import managers
 from . import choices
@@ -21,7 +20,7 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     first_name = models.CharField(_("First Name"), max_length=100)
     last_name = models.CharField(_("Last Name"), max_length=100)
     tax_vat_number = models.CharField(_("TAX/Vat Number"), max_length=12)
-    phone_number = PhoneNumberField(_("Phone"), unique=True, blank=True, null=True)
+    phone_number = models.CharField(_("Phone"), max_length=12, unique=True)
     company = models.CharField(_("Company"), max_length=125, blank=True, null=True)
     gender = models.CharField(
         _("Gender"), max_length=6, choices=choices.GENDER, blank=True, null=True

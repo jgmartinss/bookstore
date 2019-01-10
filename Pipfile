@@ -6,8 +6,6 @@ name = "pypi"
 [packages]
 djangorestframework = "*"
 django-crispy-forms = "*"
-django-phonenumber-field = "*"
-phonenumbers = "*"
 django-countries = "*"
 django-money = "*"
 pillow = "*"
