@@ -2,6 +2,10 @@ html {
   height: 100%;
 }
 
+.asteriskField {
+  display: none;
+}
+
 .body {
   height: 100%;
 }

@@ -17,12 +17,18 @@ from . import models
 
 
 class RegisterUserForm(UserCreationForm):
-    birthday = forms.DateField(
-        required=True, widget=forms.TextInput(attrs={"placeholder": "YYYY-MM-DD"})
+    email = forms.CharField(
+        label=_("Email"),
+        widget=forms.EmailInput(
+            attrs={
+                "class": "form-control", 
+                "placeholder": _("email"), 
+                "required": True
+            }
+        ),
     )
-
     password1 = forms.CharField(
-        label="Password",
+        label=_("Password"),
         widget=forms.PasswordInput(
             attrs={
                 "class": "form-control",
@@ -33,7 +39,7 @@ class RegisterUserForm(UserCreationForm):
     )
 
     password2 = forms.CharField(
-        label="Password confirmation",
+        label=_("Password confirmation"),
         widget=forms.PasswordInput(
             attrs={
                 "class": "form-control",
@@ -45,30 +51,28 @@ class RegisterUserForm(UserCreationForm):
 
     class Meta:
         model = models.User
-
-        fields = [
-            "email",
+        fields = ["email", "password1", "password2"]
+        exclude = (
             "first_name",
             "last_name",
-            "phone_number",
             "tax_vat_number",
+            "phone_number",
             "company",
             "gender",
             "birthday",
-            "password1",
-            "password2",
-        ]
+            "token",
+        )
 
         def clean_password(self):
             cleaned_data = self.cleaned_data
             if cleaned_data["password2"] != cleaned_data["password"]:
-                raise ValidationError("Password dont match")
+                raise ValidationError(_("Password dont match"))
             return cleaned_data["password2"]
 
 
 class LoginUserForm(AuthenticationForm):
     username = UsernameField(
-        label="Email",
+        label=_("Email"),
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
@@ -83,7 +87,7 @@ class LoginUserForm(AuthenticationForm):
     )
 
     password = forms.CharField(
-        label="Password",
+        label=_("Password"),
         widget=forms.PasswordInput(
             attrs={"class": "form-control", "placeholder": _("password")}
         ),

@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 djangorestframework = "*"
-django-crispy-forms = "*"
 django-countries = "*"
 django-money = "*"
 pillow = "*"
@@ -16,6 +15,7 @@ django-trumbowyg = "*"
 django-image-cropping = "*"
 easy-thumbnails = "*"
 django = "==2.0.8"
+django-crispy-forms = "*"
 
 [dev-packages]
 tox = "*"
