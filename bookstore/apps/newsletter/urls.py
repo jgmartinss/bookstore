@@ -16,6 +16,16 @@ urlpatterns = [
 		views.SubscribeCreateView.as_view(), 
 		name="new-newsletter"
 	),
+	path(
+		"list/", 
+		views.MyNewsletterListView.as_view(), 
+		name="list-newsletter"
+	),
+	path(
+		"<int:id>/del/", 
+		views.NewsletterDeleteView.as_view(), 
+		name="del-newsletter"
+	),
 ]
 urlpatterns += staticfiles_urlpatterns()
 

@@ -1,0 +1,17 @@
+{% extends 'accounts/dashboard.html' %}
+{% load staticfiles %}
+{% block title %} {{ block.super }} {% endblock %}
+{% block dashboard %}
+
+<div class="col-sm-8">
+	<form action="" method="POST">
+		{% csrf_token %}
+		<div class="alert alert-warning" role="alert">
+		  	<p class="alert-link">Deseja realmente excluir?</p>
+		</div>
+    	<input class="btn btn-danger" type="submit" value="Confirmar" />
+    	<a href="{% url 'newsletter:list-newsletter' %}" class="btn btn-primary">Cancelar</a>
+	</form>
+</div>
+
+{% endblock dashboard %}

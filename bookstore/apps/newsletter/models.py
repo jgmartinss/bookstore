@@ -8,6 +8,12 @@ from model_utils.models import TimeStampedModel
 class Subscribe(TimeStampedModel):
     email = models.EmailField(_("Email"), unique=True)
     full_name = models.CharField(_("Full name"), max_length=255)
+    created_by = models.ForeignKey(
+        "accounts.User",
+        verbose_name=_("Created by"),
+        related_name="user_subscribe",
+        on_delete=models.CASCADE,        
+    )
 
     class Meta:
         app_label = "newsletter"

@@ -1,0 +1,46 @@
+{% extends 'accounts/dashboard.html' %}
+{% load staticfiles %}
+{% block title %} {{ block.super }} - Lista de assinaturas {% endblock %}
+{% block dashboard %}
+
+<div class="col-sm-8">
+    {% include "partials/success_messages.html" %}
+    <div class="card">
+        <div class="card w-85">
+            <div class="card-body">
+                <h5 class="card-title">Lista de assinaturas
+                    <a style="float: right"href="{% url 'newsletter:new-newsletter' %}">Nova assinatura</a>
+                </h5>
+                {% if my_newsletter %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">None</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for newsletter in my_newsletter %}
+                        <tr>
+                            <td>{{newsletter.full_name}}</td>
+                            <td>{{newsletter.email}}</td>
+                            <td>
+                                <a class="btn btn-danger" href="{% url 'newsletter:del-newsletter' id=newsletter.id %}">
+                                    <em class="fa fa-trash"></em>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>Nenhuma assinatura!</p>
+                {% endif %}
+            </div>
+        </div>
+    {% include "partials/pagination.html" %}
+    </div><br>
+</div>
+
+{% endblock dashboard %}
