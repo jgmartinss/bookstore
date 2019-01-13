@@ -1,0 +1,25 @@
+{% extends 'accounts/dashboard.html' %}
+{% load staticfiles %}
+{% block title %} {{ block.super }} - Editar endereço {% endblock %}
+{% load crispy_forms_tags %}
+{% block dashboard %}
+
+<style>.asteriskField {display: none;}</style>
+<div class="col-sm-8">
+    <div class="card">
+        <div class="card w-85">
+            <div class="card-body">
+                <div class="body">
+                    <form method="POST" action="{% url 'accounts:edit-address' id=address.id %}" class="form-signin">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">SALVAR</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+</div>
+
+{% endblock dashboard %}

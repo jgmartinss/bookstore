@@ -4,6 +4,7 @@
 {% block dashboard %}
 
 <div class="col-sm-8">
+    {% include "partials/success_messages.html" %}
     <div class="card">
         <div class="card w-85">
             <div class="card-body">
@@ -17,6 +18,7 @@
                             <th scope="col">CEP</th>
                             <th scope="col">Rua/Bairro</th>
                             <th scope="col">Cidade/UF/País</th>
+                            <th scope="col">End. Cobrança?</th>
                             <th scope="col">Ações</th>
                         </tr>
                     </thead>
@@ -26,11 +28,21 @@
                             <td>{{address.postal_code}}</td>
                             <td>{{address.streets_in_line}}</td>
                             <td>{{address.region_in_line}}</td>
+                            <td>{% if address.is_billing_address == 1 %} Sim {% else %} Não {% endif %}</td>
+                            <td>
+                                <a class="btn btn-danger" href="{% url 'accounts:del-address' id=address.id %}">
+                                    <em class="fa fa-trash"></em>
+                                </a>
+                                    <a class="btn btn-primary" href="{% url 'accounts:edit-address' id=address.id %}">
+                                    <em class="fa fa-edit"></em>
+                                </a>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
                 {% else %}
+                    <p>Nenhum endereço cadastrado!</p>
                 {% endif %}
             </div>
         </div>

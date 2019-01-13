@@ -13,18 +13,14 @@ from django.contrib.auth.forms import (
 
 from django_countries.widgets import CountrySelectWidget
 
-from . import models
+from bookstore.apps.accounts.models import User, Address
 
 
 class RegisterUserForm(UserCreationForm):
     email = forms.CharField(
         label=_("Email"),
         widget=forms.EmailInput(
-            attrs={
-                "class": "form-control", 
-                "placeholder": _("email"), 
-                "required": True
-            }
+            attrs={"class": "form-control", "placeholder": _("email"), "required": True}
         ),
     )
     password1 = forms.CharField(
@@ -50,7 +46,7 @@ class RegisterUserForm(UserCreationForm):
     )
 
     class Meta:
-        model = models.User
+        model = User
         fields = ["email", "password1", "password2"]
         exclude = (
             "first_name",
@@ -100,7 +96,7 @@ class LoginUserForm(AuthenticationForm):
 
 class AddressForm(forms.ModelForm):
     class Meta:
-        model = models.Address
+        model = Address
         fields = [
             "street_1",
             "street_2",
@@ -110,12 +106,21 @@ class AddressForm(forms.ModelForm):
             "postal_code",
             "is_billing_address",
         ]
+        labels = {
+            "street_1": _("Street 1"),
+            "street_2": _("Street 2"),
+            "city": _("City"),
+            "state": _("State"),
+            "country": _("Country"),
+            "postal_code": _("Postal code"),
+            "is_billing_address": _("Is billing address?"),
+        }
         widgets = {"country": CountrySelectWidget()}
 
 
 class AccountForm(forms.ModelForm):
     class Meta:
-        model = models.User
+        model = User
         fields = [
             "email",
             "first_name",

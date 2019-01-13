@@ -4,7 +4,10 @@ from django.urls import reverse_lazy
 
 from django.utils.http import is_safe_url
 from django.utils.decorators import method_decorator
+from django.utils.translation import gettext_lazy as _
 
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
@@ -12,24 +15,37 @@ from django.contrib.auth import (
     logout as auth_logout,
 )
 
-from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
 from django.views.decorators.debug import sensitive_post_parameters
+from django.views.generic import (
+    ListView,
+    DeleteView,
+    CreateView,
+    TemplateView,
+    UpdateView,
+    RedirectView,
+    FormView,
+)
 
-from . import forms
-from . import models
+from bookstore.apps.accounts.forms import (
+    RegisterUserForm,
+    LoginUserForm,
+    AddressForm,
+    AccountForm,
+)
+from bookstore.apps.accounts.models import User, Address
 
 
-class RegisterView(generic.CreateView):
-    model = models.User
-    form_class = forms.RegisterUserForm
+class RegisterView(CreateView):
+    model = User
+    form_class = RegisterUserForm
     template_name = "accounts/register.html"
     success_url = reverse_lazy("base:index")
 
 
-class LoginView(generic.FormView):
-    form_class = forms.LoginUserForm
+class LoginView(FormView):
+    form_class = LoginUserForm
     template_name = "accounts/login.html"
     redirect_field_name = REDIRECT_FIELD_NAME
     success_url = reverse_lazy("base:index")
@@ -55,7 +71,7 @@ class LoginView(generic.FormView):
         return redirect_to
 
 
-class LogoutView(LoginRequiredMixin, generic.RedirectView):
+class LogoutView(LoginRequiredMixin, RedirectView):
     url = "/"
 
     def get(self, request, *args, **kwargs):
@@ -63,7 +79,19 @@ class LogoutView(LoginRequiredMixin, generic.RedirectView):
         return super(LogoutView, self).get(request, *args, **kwargs)
 
 
-class AccountView(LoginRequiredMixin, generic.TemplateView):
+class AccountUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = User
+    form_class = AccountForm
+    template_name = "accounts/edit_account.html"
+    success_message = _("Account edited successfully!")
+    success_url = reverse_lazy("accounts:detail")
+
+    def get_object(self):
+        _token = self.kwargs.get("token")
+        return get_object_or_404(User, token=_token)
+
+
+class AccountView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/detail.html"
 
     def get_context_data(self, **kwargs):
@@ -74,21 +102,24 @@ class AccountView(LoginRequiredMixin, generic.TemplateView):
         return context
 
     def get_user_information(self):
-        return models.User.objects.filter(id=self.request.user.id)
+        return User.objects.filter(id=self.request.user.id)
 
     def get_shipping_address_information(self):
-        return models.Address.objects.filter(user__id=self.request.user.id)[:1]
+        return Address.objects.filter(
+            user__id=self.request.user.id, is_billing_address=0
+        )[:1]
 
     def get_billing_address_information(self):
-        return models.Address.objects.filter(
+        return Address.objects.filter(
             user__id=self.request.user.id, is_billing_address=1
         )[:1]
 
 
-class AddressCreateView(LoginRequiredMixin, generic.CreateView):
-    model = models.Address
-    form_class = forms.AddressForm
-    template_name = "accounts/new-address.html"
+class AddressCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Address
+    form_class = AddressForm
+    template_name = "accounts/new_address.html"
+    success_message = _("Successfully created address!")
     success_url = reverse_lazy("accounts:list-address")
 
     def form_valid(self, form):
@@ -96,22 +127,38 @@ class AddressCreateView(LoginRequiredMixin, generic.CreateView):
         return super(AddressCreateView, self).form_valid(form)
 
 
-class AddressListView(LoginRequiredMixin, generic.ListView):
-    model = models.Address
+class AddressListView(LoginRequiredMixin, ListView):
+    model = Address
     context_object_name = "user_address"
-    template_name = "accounts/list-address.html"
+    template_name = "accounts/list_address.html"
 
     def get_queryset(self, **kwargs):
-        address = models.Address.objects.all()
-        return address.filter(user=self.request.user).order_by("-created")
+        return Address.objects.filter(user=self.request.user).order_by("-created")
 
 
-class AccountUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = models.User
-    form_class = forms.AccountForm
-    template_name = "accounts/edit-account.html"
-    success_url = reverse_lazy("accounts:detail")
+class AddressDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Address
+    template_name = "partials/delete_object.html"
+    success_message = _("Address %s deleted successfully!")
+    success_url = reverse_lazy("accounts:list-address")
 
     def get_object(self):
-        _token = self.kwargs.get("token")
-        return get_object_or_404(models.User, token=_token)
+        _id = self.kwargs.get("id")
+        return get_object_or_404(Address, id=_id)
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        messages.success(self.request, self.success_message % obj.region_in_line)
+        return super(AddressDeleteView, self).delete(request, *args, **kwargs)
+
+
+class AddressUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Address
+    form_class = AddressForm
+    template_name = "accounts/edit_adddress.html"
+    success_message = _("Address edited successfully!")
+    success_url = reverse_lazy("accounts:list-address")
+
+    def get_object(self):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(Address, id=_id)

@@ -5,7 +5,17 @@ from django.conf.urls.static import static
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from . import views
+from bookstore.apps.accounts.views import (
+    LoginView,
+    RegisterView,
+    LogoutView,
+    AccountView,
+    AccountUpdateView,
+    AddressCreateView,
+    AddressListView,
+    AddressDeleteView,
+    AddressUpdateView,
+)
 
 
 app_name = "accounts"
@@ -13,38 +23,48 @@ app_name = "accounts"
 urlpatterns = [
     path(
         "login/", 
-        views.LoginView.as_view(), 
+        LoginView.as_view(), 
         name="login"
     ),
     path(
         "register/", 
-        views.RegisterView.as_view(), 
+        RegisterView.as_view(), 
         name="register"
     ),
     path(
         "logout/", 
-        views.LogoutView.as_view(), 
+        LogoutView.as_view(), 
         name="logout"
     ),
     path(
         "customer/", 
-        views.AccountView.as_view(), 
+        AccountView.as_view(), 
         name="detail"
     ),
     path(
         "customer/<str:token>/edit/", 
-        views.AccountUpdateView.as_view(), 
+        AccountUpdateView.as_view(), 
         name="edit"
     ),
     path(
         "customer/address/new/", 
-        views.AddressCreateView.as_view(), 
+        AddressCreateView.as_view(), 
         name="new-address"
     ),
     path(
         "customer/address/list/", 
-        views.AddressListView.as_view(), 
+        AddressListView.as_view(), 
         name="list-address"
+    ),
+    path(
+        "customer/address/<int:id>/del/",
+        AddressDeleteView.as_view(),
+        name="del-address",
+    ),
+    path(
+        "customer/address/<int:id>/edit/",
+        AddressUpdateView.as_view(),
+        name="edit-address"
     ),
 ]
 urlpatterns += staticfiles_urlpatterns()
