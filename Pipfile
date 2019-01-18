@@ -14,8 +14,8 @@ django-model-utils = "*"
 django-trumbowyg = "*"
 django-image-cropping = "*"
 easy-thumbnails = "*"
-django = "==2.0.8"
 django-crispy-forms = "*"
+django = "==2.0.10"
 
 [dev-packages]
 tox = "*"
