@@ -12,7 +12,7 @@ app_name = "orders"
 
 urlpatterns = [
     path(
-        "myorders/", 
+        "history/", 
         OrderListView.as_view(), 
         name="list-order"
     ),

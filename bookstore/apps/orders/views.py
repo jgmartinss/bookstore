@@ -57,35 +57,6 @@ class OrderSuccessView(LoginRequiredMixin, generic.TemplateView):
         ]
 
 
-# class OrdersListView(LoginRequiredMixin, generic.ListView):
-#     model = Order
-#     context_object_name = "orders"
-#     template_name = "accounts/list_orders.html"
-
-#     def get_queryset(self, **kargs):
-
-#         ordedsfdsf = []
-
-#         order_user = Order.objects.filter(user=self.request.user)
-
-#         for order in order_user:
-#             order_item = OrderItem.objects.filter(order=order)
-#             itens = [oi.to_dict_json() for oi in order_item]
-#             # orders = [i.to_dict_json() for i in order_user]
-
-#             order_dict = {
-#                 "id": order.id,
-#                 "status": order.status,
-#                 "created": order.created,
-#                 "user": order.user.email,
-#                 "itens": itens,
-#             }
-
-#             ordedsfdsf.append(order_dict)
-#         print("\n".join("{}: {}".format(*k) for k in enumerate(ordedsfdsf)))
-#         return ordedsfdsf
-
-
 class OrderListView(LoginRequiredMixin, generic.ListView):
     model = Order
     context_object_name = "orders"
