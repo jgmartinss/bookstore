@@ -36,6 +36,17 @@ class Order(TimeStampedModel):
         verbose_name_plural = _("Orders")
         db_table = "tb_orders_order"
 
+    def to_dict_json(self):
+        return {
+            "user_email": self.user.email,
+            "user_name": f"{self.user.first_name} {self.user.last_name}",
+            "order_id": self.id,
+            "order_date": self.created,
+            "shipping_address": self.shipping_address,
+            "billing_address": self.billing_address,
+            "status": self.status,
+        }
+
     def __str__(self):
         return f"{self.id}"
 
@@ -68,8 +79,10 @@ class OrderItem(TimeStampedModel):
     def to_dict_json(self):
         return {
             "product": self.product.title,
+            "price_unit": self.product.price,
             "price": self.price,
             "quantity": self.quantity,
+            "url": self.product.get_absolute_url,
         }
 
     def __str__(self):

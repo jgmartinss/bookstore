@@ -1,0 +1,87 @@
+{% extends 'accounts/dashboard.html' %}
+{% load staticfiles %}
+{% block title %} {{ block.super }} - Meu pedido {% endblock %}
+{% block dashboard %}
+
+<link href="{% static 'css/orders/style.css' %}" rel="stylesheet">
+
+<div class="col-sm-9">
+    <div class="card">
+        <div class="card w-95">
+            <div class="card-body">
+                <div id="invoice">
+                    <div class="invoice overflow-auto">
+                        <div style="min-width: 400px">
+                            <main>
+                                <div class="row contacts">
+                                {% for o in order %}
+                                    <div class="col invoice-to">
+                                        <div class="text-gray-light">PEDIDO DE:</div>
+                                        <h2 class="to">{{o.user_name}}</h2>
+                                        <div class="address">{{o.shipping_address}}</div>
+                                        <div class="address">{{o.billing_address}}</div>
+                                        <div class="email">
+                                            <a href="mailto:{{o.user_email}}">{{o.user_email}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="col invoice-details">
+                                        <h1 class="invoice-id">PEDIDO: 000{{o.order_id}}</h1>
+                                        <div class="date">Date pedido: {{o.order_date|date:"d M, Y"}}</div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <table border="0" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="text-left">DESCRIÇÃO</th>
+                                            <th class="text-right">PREÇO UNI.</th>
+                                            <th class="text-right">QTD</th>
+                                            <th class="text-right">TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in itens %}
+                                        <tr>
+                                            <td class="no">04</td>
+                                            <td class="text-left">
+                                                <h3><a target="_blank" href="{{i.url}}">{{i.product}}</a></h3>
+                                            </td>
+                                            <td class="unit">${{i.price_unit}}</td>
+                                            <td class="qty">{{i.quantity}}</td>
+                                            <td class="total">${{i.price}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">SUBTOTAL</td>
+                                            <td>$5,200.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">TAX 25%</td>
+                                            <td>$1,300.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td colspan="2">GRAND TOTAL</td>
+                                            <td>$6,500.00</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="notices">
+                                    <div>NOTICE:</div>
+                                    <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br/>
+</div>
+
+{% endblock dashboard %}

@@ -138,7 +138,7 @@ class Book(abstract_models.Product):
         return int(queryset.aggregate(Avg("number_of_stars"))["number_of_stars__avg"])
 
     def get_absolute_url(self):
-        return reverse("book-detail", kwargs={"slug": self.slug})
+        return reverse("catalog:book-detail", kwargs={"slug": self.slug})
 
     def __str__(self):
         if self.original_title:

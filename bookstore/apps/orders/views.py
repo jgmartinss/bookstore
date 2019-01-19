@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.views import generic
+from django.views.generic import ListView, TemplateView
 
 from bookstore.apps.checkout.cart import Cart
 
@@ -43,7 +43,7 @@ def create_order(request):
     )
 
 
-class OrderSuccessView(LoginRequiredMixin, generic.TemplateView):
+class OrderSuccessView(LoginRequiredMixin, TemplateView):
     template_name = "checkout/success.html"
 
     def get_context_data(self, **kwargs):
@@ -57,7 +57,7 @@ class OrderSuccessView(LoginRequiredMixin, generic.TemplateView):
         ]
 
 
-class OrderListView(LoginRequiredMixin, generic.ListView):
+class OrderListView(LoginRequiredMixin, ListView):
     model = Order
     context_object_name = "orders"
     paginate_by = 6
@@ -80,4 +80,28 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
                 "status": order.status,
             }
             context.append(order_dict)
+        return context
+
+
+class OrderDetailView(LoginRequiredMixin, TemplateView):
+    template_name = "orders/detail.html"
+
+    def get_object(self):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(Order, id=_id)
+
+    def get_order(self):
+        obj = self.get_object()
+        order = [o.to_dict_json() for o in Order.objects.filter(order__id=obj.id)]
+        return order
+
+    def get_items_ordered(self):
+        obj = self.get_object()
+        itens = [o.to_dict_json() for o in OrderItem.objects.filter(order__id=obj.id)]
+        return itens
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderDetailView, self).get_context_data(**kwargs)
+        context["order"] = self.get_order()
+        context["itens"] = self.get_items_ordered()
         return context

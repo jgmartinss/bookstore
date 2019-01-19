@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from bookstore.apps.orders.views import OrderListView
+from bookstore.apps.orders.views import OrderListView, OrderDetailView
 
 
 app_name = "orders"
@@ -15,6 +15,11 @@ urlpatterns = [
         "history/", 
         OrderListView.as_view(), 
         name="list-order"
+    ),
+    path(
+        "<int:id>/detail/", 
+        OrderDetailView.as_view(), 
+        name="detail"
     ),
 ]
 urlpatterns += staticfiles_urlpatterns()
