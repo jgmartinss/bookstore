@@ -55,3 +55,57 @@ class OrderSuccessView(LoginRequiredMixin, generic.TemplateView):
         return Order.objects.filter(user__id=self.request.user.id).order_by("-id")[:1][
             ::-1
         ]
+
+
+# class OrdersListView(LoginRequiredMixin, generic.ListView):
+#     model = Order
+#     context_object_name = "orders"
+#     template_name = "accounts/list_orders.html"
+
+#     def get_queryset(self, **kargs):
+
+#         ordedsfdsf = []
+
+#         order_user = Order.objects.filter(user=self.request.user)
+
+#         for order in order_user:
+#             order_item = OrderItem.objects.filter(order=order)
+#             itens = [oi.to_dict_json() for oi in order_item]
+#             # orders = [i.to_dict_json() for i in order_user]
+
+#             order_dict = {
+#                 "id": order.id,
+#                 "status": order.status,
+#                 "created": order.created,
+#                 "user": order.user.email,
+#                 "itens": itens,
+#             }
+
+#             ordedsfdsf.append(order_dict)
+#         print("\n".join("{}: {}".format(*k) for k in enumerate(ordedsfdsf)))
+#         return ordedsfdsf
+
+
+class OrderListView(LoginRequiredMixin, generic.ListView):
+    model = Order
+    context_object_name = "orders"
+    template_name = "orders/list_orders.html"
+
+    def get_queryset(self, **kargs):
+        order_dict = {}
+        context = []
+        total = "$200fake"
+        orders = Order.objects.filter(user=self.request.user).order_by("-created")
+
+        for order in orders:
+            full_name = "{} {}".format(order.user.first_name, order.user.last_name)
+
+            order_dict = {
+                "id": order.id,
+                "date": order.created,
+                "shipto": full_name,
+                "total": total,
+                "status": order.status,
+            }
+            context.append(order_dict)
+        return context

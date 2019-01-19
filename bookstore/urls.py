@@ -13,6 +13,7 @@ urlpatterns = [
     path("account/", include("bookstore.apps.accounts.urls")),
     path("catalog/", include("bookstore.apps.catalog.urls")),
     path("checkout/", include("bookstore.apps.checkout.urls")),
+    path("orders/", include("bookstore.apps.orders.urls")),
     path("newsletter/", include("bookstore.apps.newsletter.urls")),
     path("trumbowyg/", include("trumbowyg.urls")),
 ]

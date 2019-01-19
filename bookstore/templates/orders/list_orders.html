@@ -1,0 +1,63 @@
+{% extends 'accounts/dashboard.html' %}
+{% load staticfiles %}
+{% block title %} {{ block.super }} - Livro de endereços {% endblock %}
+{% block dashboard %}
+
+<div class="col-sm-9">
+    {% include "partials/success_messages.html" %}
+    <div class="card">
+        <div class="card w-95">
+            <div class="card-body">
+                <h5 class="card-title">Lista de pedidos
+                    <a style="float: right"href="">Continuar comprando</a>
+                </h5>
+                {% if orders %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Pedido</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Enviar para</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">   </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td>{{order.date|date:"d M, Y"}}</td>
+                            <td>{{order.shipto}}</td>
+                            <td>{{order.total}}</td>
+                            {% if order.status == 1 %}
+                                <td>Processando</td>
+                            {% elif order.status == 2 %}
+                                <td>Pagamento Pendente</td>
+                            {% elif order.status == 3 %}
+                                <td>Cancelado</td>
+                            {% elif order.status == 4 %}
+                                <td>Completo</td>
+                            {% elif order.status == 5 %}
+                                <td>Faturado</td>
+                            {% else %}
+                                <td> </td>
+                            {% endif %}
+                            <td>
+                                <a  href="">
+                                    <em class="fa fa-search"></em>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>Nenhuma compra efetuada!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div><br/>
+</div>
+
+{% endblock dashboard %}

@@ -5,12 +5,18 @@ from django.conf.urls.static import static
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from . import views
+from bookstore.apps.orders.views import OrderListView
 
 
 app_name = "orders"
 
-urlpatterns = []
+urlpatterns = [
+    path(
+        "myorders/", 
+        OrderListView.as_view(), 
+        name="list-order"
+    ),
+]
 urlpatterns += staticfiles_urlpatterns()
 
 if settings.DEBUG:

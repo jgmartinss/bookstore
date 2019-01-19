@@ -65,5 +65,12 @@ class OrderItem(TimeStampedModel):
     def get_cost(self):
         return self.price * self.quantity
 
+    def to_dict_json(self):
+        return {
+            "product": self.product.title,
+            "price": self.price,
+            "quantity": self.quantity,
+        }
+
     def __str__(self):
         return "{}".format(self.id)

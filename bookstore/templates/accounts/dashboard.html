@@ -20,7 +20,9 @@
                         <a href="{% url 'accounts:list-address' %}">
                             <li class="list-group-item">Livro de endereços</li>
                         </a>
-                        <a href=""><li class="list-group-item">Meu pedidos</li></a>
+                        <a href="{% url 'orders:list-order' %}">
+                            <li class="list-group-item">Meu pedidos</li>
+                        </a>
                         <a href=""><li class="list-group-item">Minhas avaliações</li></a>
                         <a href="{% url 'newsletter:new-newsletter' %}">
                             <li class="list-group-item">Assinar newsletter</li>
