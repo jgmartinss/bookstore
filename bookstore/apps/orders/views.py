@@ -60,6 +60,7 @@ class OrderSuccessView(LoginRequiredMixin, generic.TemplateView):
 class OrderListView(LoginRequiredMixin, generic.ListView):
     model = Order
     context_object_name = "orders"
+    paginate_by = 6
     template_name = "orders/list_orders.html"
 
     def get_queryset(self, **kargs):

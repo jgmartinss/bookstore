@@ -130,6 +130,7 @@ class AddressCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class AddressListView(LoginRequiredMixin, ListView):
     model = Address
     context_object_name = "user_address"
+    paginate_by = 8
     template_name = "accounts/list_address.html"
 
     def get_queryset(self, **kwargs):
