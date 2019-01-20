@@ -8,6 +8,7 @@ from bookstore.apps.catalog.models import (
     Author,
     PublishingCompany,
     BookReview,
+    BookImages,
     AuthorImages,
 )
 
