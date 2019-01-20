@@ -19,7 +19,7 @@
                                 <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="{% url 'catalog:book-detail' slug=book.slug %}" title="View Product">
+                                        <a href="{{ book.get_absolute_url}}" title="View Product">
                                         {% if book.title %} 
                                             {{book.title}}
                                         {% else %}
@@ -45,7 +45,7 @@
                                             </p>
                                         </div>
                                         <div class="col">
-                                            <a href="{% url 'catalog:book-detail' slug=book.slug %}" class="btn btn-success btn-block">View</a>
+                                            <a href="{{ book.get_absolute_url}}" class="btn btn-success btn-block">View</a>
                                         </div>
                                     </div>
                                 </div>

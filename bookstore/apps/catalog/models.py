@@ -26,7 +26,7 @@ class PublishingCompany(TimeStampedModel):
         db_table = "tb_catalog_publishing_company"
 
     def get_absolute_url(self):
-        return reverse("publishingcompany:detail", kwargs={"slug": self.slug})
+        return reverse("catalog:publisher-detail", kwargs={"slug": self.slug})
 
     def __str__(self):
         return f"{self.name}"
@@ -48,7 +48,7 @@ class Author(TimeStampedModel):
         return Book.objects.filter(author=self).count()
 
     def get_absolute_url(self):
-        return reverse("author:detail", kwargs={"slug": self.slug})
+        return reverse("catalog:author-detail", kwargs={"slug": self.slug})
 
     def __str__(self):
         return f"{self.name}"
@@ -86,7 +86,7 @@ class Category(MPTTModel, TimeStampedModel):
         return slugs
 
     def get_absolute_url(self):
-        return reverse("category:detail", kwargs={"slug": self.slug})
+        return reverse("catalog:category-detail", kwargs={"slug": self.slug})
 
     def __str__(self):
         return f"{self.name}"
@@ -164,7 +164,7 @@ class BookImages(TimeStampedModel):
         db_table = "tb_catalog_book_images"
 
     def get_absolute_url(self):
-        return reverse("bookimages:detail", kwargs={"pk": self.id})
+        return reverse("catalog:bookimages-detail", kwargs={"pk": self.id})
 
     def __str__(self):
         return f"{self.book.title}/ {self.id}"
@@ -199,7 +199,7 @@ class BookReview(TimeStampedModel):
         return truncatechars(self.comment, 45)
 
     def get_absolute_url(self):
-        return reverse("bookreview:detail", kwargs={"pk": self.id})
+        return reverse("catalog:bookreview-detail", kwargs={"pk": self.id})
 
     def __str__(self):
         return f"({self.book.title}) - {self.number_of_stars} Stars by: {self.user}"
