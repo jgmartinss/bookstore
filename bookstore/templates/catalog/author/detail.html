@@ -11,6 +11,15 @@
                     <i class="fa fa-align-justify"></i> Autor: {{author.name}}
                 </div>
                 <div class="card-body">
+                    <div class="card" style="width: 18rem;">
+                        {% for author_image in author_images %}
+                            {% if author.image %}
+                                <img class="card-img-top" src="{{ author.image.url }}" />
+                            {% else %}
+                                <img class="card-img-top" src="https://dummyimage.com/600x600/55595c/fff" />
+                            {% endif %}
+                        {% endfor %}
+                    </div><br>
                     <p class="card-text">
                         {% if author.about_of %} 
                             {{author.about_of}}

@@ -5,13 +5,26 @@ from django.utils.translation import gettext_lazy as _
 from mptt.admin import DraggableMPTTAdmin
 from image_cropping import ImageCroppingMixin
 
-from . import models
-from . import forms
+from bookstore.apps.catalog.models import (
+    BookImages,
+    AuthorImages,
+    Category,
+    PublishingCompany,
+    Author,
+    Book,
+    BookReview,
+)
+from bookstore.apps.catalog.forms import (
+    BookImagesForm,
+    AuthorImagesForm,
+    AuthorForm,
+    BookForm,
+)
 
 
 class BookImagesAdmin(ImageCroppingMixin, admin.ModelAdmin):
-    model = models.BookImages
-    form = forms.BookImagesForm
+    model = BookImages
+    form = BookImagesForm
     fieldsets = (
         (
             None,
@@ -20,12 +33,30 @@ class BookImagesAdmin(ImageCroppingMixin, admin.ModelAdmin):
     )
 
 
+class AuthorImagesAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    model = AuthorImages
+    form = AuthorImagesForm
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "author",
+                    "image",
+                    "list_page_cropping",
+                    "detail_page_cropping",
+                )
+            },
+        ),
+    )
+
+
 class BookImagesInline(ImageCroppingMixin, admin.TabularInline):
-    model = models.BookImages
+    model = BookImages
 
 
 class CategoryAdmin(DraggableMPTTAdmin, admin.ModelAdmin):
-    model = models.Category
+    model = Category
     ordering = ("name", "-created")
     search_fields = ("name",)
     list_display = ("name",)
@@ -35,7 +66,7 @@ class CategoryAdmin(DraggableMPTTAdmin, admin.ModelAdmin):
 
 
 class PublishingCompanyAdmin(admin.ModelAdmin):
-    model = models.PublishingCompany
+    model = PublishingCompany
     ordering = ("name", "-created")
     search_fields = ("name",)
     list_display = ("name",)
@@ -45,8 +76,8 @@ class PublishingCompanyAdmin(admin.ModelAdmin):
 
 
 class AuthorAdmin(admin.ModelAdmin):
-    model = models.Author
-    form = forms.AuthorForm
+    model = Author
+    form = AuthorForm
     list_per_page = 20
     ordering = ("name", "-created")
     search_fields = ("name",)
@@ -57,8 +88,8 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 class BookAdmin(admin.ModelAdmin):
-    model = models.Book
-    form = forms.BookForm
+    model = Book
+    form = BookForm
     # inlines = [BookImagesInline]
     list_per_page = 15
     save_on_top = True
@@ -147,7 +178,7 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class BookReviewAdmin(admin.ModelAdmin):
-    model = models.BookReview
+    model = BookReview
     ordering = ("-created",)
     search_fields = ("user", "book__title")
     list_display = ("book", "get_short_comment", "user", "number_of_stars")
@@ -157,9 +188,10 @@ class BookReviewAdmin(admin.ModelAdmin):
     list_per_page = 15
 
 
-admin.site.register(models.Author, AuthorAdmin)
-admin.site.register(models.Category, CategoryAdmin)
-admin.site.register(models.PublishingCompany, PublishingCompanyAdmin)
-admin.site.register(models.Book, BookAdmin)
-admin.site.register(models.BookImages, BookImagesAdmin)
-admin.site.register(models.BookReview, BookReviewAdmin)
+admin.site.register(Author, AuthorAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(PublishingCompany, PublishingCompanyAdmin)
+admin.site.register(Book, BookAdmin)
+admin.site.register(BookImages, BookImagesAdmin)
+admin.site.register(AuthorImages, AuthorImagesAdmin)
+admin.site.register(BookReview, BookReviewAdmin)

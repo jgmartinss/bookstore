@@ -8,7 +8,13 @@ from faker import Faker
 
 from bookstore.apps.accounts.factories import UserFactory
 
-from . import models
+from bookstore.apps.catalog.models import (
+    Book,
+    Author,
+    PublishingCompany,
+    Category,
+    BookReview,
+)
 from . import choices
 
 
@@ -17,7 +23,7 @@ fake = Faker()
 
 class PublishingCompanyFactory(DjangoModelFactory):
     class Meta:
-        model = models.PublishingCompany
+        model = PublishingCompany
 
     slug = factory.LazyAttribute(lambda o: slugify(o.name))
 
@@ -28,7 +34,7 @@ class PublishingCompanyFactory(DjangoModelFactory):
 
 class AuthorFactory(DjangoModelFactory):
     class Meta:
-        model = models.Author
+        model = Author
 
     about_of = factory.Faker("sentence")
     slug = factory.LazyAttribute(lambda o: slugify(o.name))
@@ -40,7 +46,7 @@ class AuthorFactory(DjangoModelFactory):
 
 class CategoryFactory(DjangoModelFactory):
     class Meta:
-        model = models.Category
+        model = Category
 
     slug = factory.LazyAttribute(lambda o: slugify(o.name))
 
@@ -51,7 +57,7 @@ class CategoryFactory(DjangoModelFactory):
 
 class BookFactory(DjangoModelFactory):
     class Meta:
-        model = models.Book
+        model = Book
 
     original_title = factory.Faker("name")
     publishing_company = factory.SubFactory(PublishingCompanyFactory)
@@ -91,7 +97,7 @@ class BookFactory(DjangoModelFactory):
 
     @factory.post_generation
     def category(self, create, extracted, **kwargs):
-        categories = models.Category.objects.all()
+        categories = Category.objects.all()
         for category in random.choices(
             categories, k=random.randint(1, len(categories))
         ):
@@ -99,14 +105,14 @@ class BookFactory(DjangoModelFactory):
 
     @factory.post_generation
     def author(self, create, extracted, **kwargs):
-        authors = models.Author.objects.all()
+        authors = Author.objects.all()
         for author in random.choices(authors, k=random.randint(1, len(authors))):
             self.author.add(author)
 
 
 class BookReviewFactory(DjangoModelFactory):
     class Meta:
-        model = models.BookReview
+        model = BookReview
 
     book = factory.SubFactory(BookFactory)
     comment = factory.Faker("sentence")

@@ -9,10 +9,9 @@ from django.template.defaultfilters import truncatechars
 
 from mptt.models import MPTTModel, TreeForeignKey
 from model_utils.models import TimeStampedModel
-from image_cropping import ImageCropField, ImageRatioField
 
-from . import abstract_models
-from . import choices
+from bookstore.apps.catalog.abstract_models import Product, AbstractImage
+from bookstore.apps.catalog.choices import NUMBER_OF_STAR, LANGUAGES
 
 
 class PublishingCompany(TimeStampedModel):
@@ -92,7 +91,7 @@ class Category(MPTTModel, TimeStampedModel):
         return f"{self.name}"
 
 
-class Book(abstract_models.Product):
+class Book(Product):
     title = models.CharField(_("Title"), max_length=125)
     original_title = models.CharField(_("Original Title"), max_length=125)
     slug = models.SlugField(_("Slug"), unique=True, blank=True)
@@ -112,7 +111,7 @@ class Book(abstract_models.Product):
     synopsis = models.TextField(_("Synopsis"))
     num_of_pages = models.PositiveSmallIntegerField(_("Number of pages"), default=1)
     hardback = models.BooleanField(_("Hardback?"), default=False)
-    language = models.CharField(_("Language"), max_length=20, choices=choices.LANGUAGES)
+    language = models.CharField(_("Language"), max_length=20, choices=LANGUAGES)
 
     class Meta:
         app_label = "catalog"
@@ -146,16 +145,13 @@ class Book(abstract_models.Product):
         return f"{self.title}"
 
 
-class BookImages(TimeStampedModel):
+class BookImages(AbstractImage):
     book = models.ForeignKey(
         "catalog.Book",
         verbose_name=_("Book"),
-        related_name="images",
+        related_name="+",
         on_delete=models.CASCADE,
     )
-    image = ImageCropField(_("Image"), blank=True, upload_to="media")
-    list_page_cropping = ImageRatioField("image", "600x400")
-    detail_page_cropping = ImageRatioField("image", "800x800")
 
     class Meta:
         app_label = "catalog"
@@ -168,6 +164,27 @@ class BookImages(TimeStampedModel):
 
     def __str__(self):
         return f"{self.book.title}/ {self.id}"
+
+
+class AuthorImages(AbstractImage):
+    author = models.ForeignKey(
+        "catalog.Author",
+        verbose_name=_("Author"),
+        related_name="+",
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        app_label = "catalog"
+        verbose_name = _("Author Image")
+        verbose_name_plural = _("Author Images")
+        db_table = "tb_catalog_author_images"
+
+    def get_absolute_url(self):
+        return reverse("catalog:authorimages-detail", kwargs={"pk": self.id})
+
+    def __str__(self):
+        return f"{self.author.name}/ {self.id}"
 
 
 class BookReview(TimeStampedModel):
@@ -185,7 +202,7 @@ class BookReview(TimeStampedModel):
         on_delete=models.CASCADE,
     )
     number_of_stars = models.PositiveIntegerField(
-        _("Stars"), choices=choices.NUMBER_OF_STAR, default=1
+        _("Stars"), choices=NUMBER_OF_STAR, default=1
     )
 
     class Meta:

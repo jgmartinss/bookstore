@@ -2,17 +2,21 @@ from django.db import models
 
 from django.utils.translation import gettext_lazy as _
 
-from djmoney.models.fields import MoneyField
 from model_utils.models import TimeStampedModel
+from image_cropping import ImageCropField, ImageRatioField
 
-from . import choices
+from bookstore.apps.catalog.choices import (
+    VISIBLE_WHERE,
+    SHOW_REAL_PRICE,
+    AVAILABILITY_OF_STOCK,
+)
 
 
 class Product(TimeStampedModel):
     is_active = models.BooleanField(_("Is active?"), default=True)
     is_featured = models.BooleanField(_("Is featured?"), default=True)
     visible_where = models.PositiveSmallIntegerField(
-        _("Visible where?"), choices=choices.VISIBLE_WHERE
+        _("Visible where?"), choices=VISIBLE_WHERE
     )
     price = models.DecimalField(_("Price"), max_digits=10, decimal_places=2)
     cost_price = models.DecimalField(_("Cost price"), max_digits=10, decimal_places=2)
@@ -26,10 +30,10 @@ class Product(TimeStampedModel):
         _("Special price to date"), blank=True, null=True
     )
     show_real_price = models.PositiveSmallIntegerField(
-        _("Show real price"), choices=choices.SHOW_REAL_PRICE
+        _("Show real price"), choices=SHOW_REAL_PRICE
     )
     availability_of_stock = models.PositiveSmallIntegerField(
-        _("Availability of stock"), choices=choices.AVAILABILITY_OF_STOCK
+        _("Availability of stock"), choices=AVAILABILITY_OF_STOCK
     )
     quantity = models.PositiveIntegerField(_("Quantity"), default=0)
     inventory_maintenance_unit = models.PositiveIntegerField(
@@ -48,6 +52,15 @@ class Product(TimeStampedModel):
     length = models.FloatField(_("Length"), help_text=_("Measured in centimeters."))
     height = models.FloatField(_("Height"), help_text=_("Measured in centimeters."))
     width = models.FloatField(_("Width"), help_text=_("Measured in centimeters."))
+
+    class Meta:
+        abstract = True
+
+
+class AbstractImage(TimeStampedModel):
+    image = ImageCropField(_("Image"), blank=True, upload_to="media")
+    list_page_cropping = ImageRatioField("image", "600x400")
+    detail_page_cropping = ImageRatioField("image", "800x800")
 
     class Meta:
         abstract = True
