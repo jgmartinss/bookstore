@@ -13,6 +13,8 @@ from bookstore.apps.orders.forms import OrderForm
 
 from decimal import Decimal
 
+from django.db.models import Sum
+
 
 @login_required
 def create_order(request):
@@ -66,11 +68,14 @@ class OrderListView(LoginRequiredMixin, ListView):
     def get_queryset(self, **kargs):
         order_dict = {}
         context = []
-        total = "$200fake"
         orders = Order.objects.filter(user=self.request.user).order_by("-created")
 
         for order in orders:
             full_name = "{} {}".format(order.user.first_name, order.user.last_name)
+
+            items = OrderItem.objects.filter(order__id=order.id)
+            aggregate = items.aggregate(Sum("price"))
+            total = aggregate["price__sum"]
 
             order_dict = {
                 "id": order.id,
@@ -100,8 +105,16 @@ class OrderDetailView(LoginRequiredMixin, TemplateView):
         itens = [o.to_dict_json() for o in OrderItem.objects.filter(order__id=obj.id)]
         return itens
 
+    def get_subtotal(self):
+        obj = self.get_object()
+        items = OrderItem.objects.filter(order__id=obj.id)
+        aggregate = items.aggregate(Sum("price"))
+        subtotal = aggregate["price__sum"]
+        return subtotal
+
     def get_context_data(self, **kwargs):
         context = super(OrderDetailView, self).get_context_data(**kwargs)
         context["order"] = self.get_order()
         context["itens"] = self.get_items_ordered()
+        context["subtotal"] = self.get_subtotal()
         return context

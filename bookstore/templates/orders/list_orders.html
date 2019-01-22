@@ -28,7 +28,7 @@
                             <td>{{order.id}}</td>
                             <td>{{order.date|date:"d M, Y"}}</td>
                             <td>{{order.shipto}}</td>
-                            <td>{{order.total}}</td>
+                            <td>${{order.total}}</td>
                             {% if order.status == 1 %}
                                 <td>Processando</td>
                             {% elif order.status == 2 %}
