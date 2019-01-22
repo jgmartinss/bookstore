@@ -52,7 +52,13 @@
                 </div>
                 <a class="btn btn-success btn-sm ml-3" href="{% url 'checkout:cart_detail' %}">
                     <i class="fa fa-shopping-cart"></i> Carrinho
-                    <span class="badge badge-light">3</span>
+                    <span class="badge badge-light">
+                        {% if user.is_authenticated %}
+                            {{ cart.get_car_len }}
+                        {% else %}
+                            0
+                        {% endif %}
+                    </span>
                 </a>
             </form>
         </div>

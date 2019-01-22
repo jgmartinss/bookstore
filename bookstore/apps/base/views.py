@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.views import generic
 
-from bookstore.apps.checkout.forms import CartAddProductForm
+from bookstore.apps.checkout.cart import Cart
 from bookstore.apps.catalog.models import Book
 
 
@@ -27,3 +27,8 @@ class IndexView(generic.TemplateView):
     def get_top_product(self):
         # retornar o produto mais vendido
         pass
+
+
+def cart_len(request):
+    cart = Cart(request)
+    return render(request, "partials/nav.html", {"cart": cart})
